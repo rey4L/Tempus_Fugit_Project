@@ -52,21 +52,16 @@ class Router {
     public function __construct() {
         $this->loadController();
     }
-
+    
     private function loadController() {
         $path = $_SERVER["REQUEST_URI"];
         $url = $this->getUrl($path);
 
-        // Default controller and method when the app starts
         if (count($url) === 0) { 
-            
-            if($this->isUserLoggedIn()) {
-                $this->controller = $this->getControllerName("Register");
-            } else {
-                $this->controller = $this->getControllerName("User");
-            }
+            if($this->isUserLoggedIn()) $controllerName = $this->getControllerName("Register");
+            else $controllerName = $this->getControllerName("User");
 
-            $this->getController($this->controller);
+            $this->getController($controllerName);
             $this->method = "index";
 
         } else {
@@ -74,46 +69,29 @@ class Router {
 
             if ($this->controllerExists($this->controller)) {
                 $this->getController($this->controller);
-    
-                if (count($url) === 1) {
-                    $this->method = "index";
-                } else {
-                    if (method_exists($this->controller, $url[1])) {
-                        $this->method = $url[1];
-                    } else {
-                        $this->method = "";
-                    }
-                }
+                if (count($url) === 1) $this->method = "index";
+                else 
+                    if (method_exists($this->controller, $url[1])) $this->method = $url[1];
+                    else $this->method = "";
             } else $this->reset();
         } 
 
         if ($this->controller !== "" && $this->method !== "") {
             if (!empty($url[2])) $this->params = [$url[2]];
-
-            // Decisions based on HTTP requests
-
-            // If the request is POST but not a valid post request path, then return an error
+            
             if (METHOD === POST && !in_array($this->method, $this->validPostPaths)) $this->loadError("401");
 
-            // If the request is GET but not a valid get request path, then return an error
             if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) $this->loadError("401");
-
-            // check authorization permissions
-            // the php intellisense gives a false error with get_class
+         
             if(!$this->checkUserPermissions(get_class($this->controller))) $this->loadError("401");
             
-        } else {
-            // Redirect to the 404 page
-            $this->loadError("404");
-        }
+        } else $this->loadError("404");
 
-        // Calls the assigned controller and method
         call_user_func_array(
             [$this->controller, $this->method], 
             $this->params
         );
 
-        // Reset attributes
         $this->reset();
     }
 
