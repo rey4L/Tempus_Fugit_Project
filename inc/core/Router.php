@@ -56,19 +56,20 @@ class Router {
         $url = $this->getUrl($path);
 
         if (count($url) === 0) { 
-            if($this->isUserLoggedIn()) 
-                $controllerName = $this->getControllerName("Register");
+            if ($this->isUserLoggedIn()) 
+                $controllerName = $this->getControllerName("register");
             else 
-                $controllerName = $this->getControllerName("User");
+                $controllerName = $this->getControllerName("user");
 
             $this->getController($controllerName);
             $this->method = "index";
 
         } else {
-            $this->controller = $this->getControllerName($url[0]);
+     
+            $controllerName = $this->getControllerName($url[0]);
 
-            if ($this->controllerExists($this->controller)) {
-                $this->getController($this->controller);
+            if ($this->controllerExists($controllerName)) {
+                $this->getController($controllerName);
                 if (count($url) === 1) 
                     $this->method = "index";
                 else 
@@ -79,7 +80,7 @@ class Router {
             } else $this->reset();
         } 
 
-        if ($this->controller !== "" && $this->method !== "") {
+        if ($this->controller !== null && $this->method !== "") {
             if (!empty($url[2])) 
                 $this->params = [$url[2]];
             
@@ -108,9 +109,9 @@ class Router {
         return array_slice($url, count($base_url));	
     }
 
-    private function getController($controller_name = "") {
-        require __DIR__."/../controller/controllers/".$controller_name.".php";
-        $this->controller = new $this->controller;
+    private function getController($controller = "") {
+        require __DIR__."/../controller/controllers/".$controller.".php";
+        $this->controller = new $controller();
     }
 
     private function getControllerName($path) {
