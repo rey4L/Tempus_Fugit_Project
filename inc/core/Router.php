@@ -5,8 +5,8 @@ $_SESSION['user_id'] = 1;
 $_SESSION['user_role'] = 'manager';
 
 class Router {
-    private $controller = '';
-    private $method = '';
+    private $controller = null;
+    private $method = "";
     private $params = [];
 
     private $validGetPaths = [
@@ -143,7 +143,7 @@ class Router {
     }
 
     private function reset() {
-        $this->controller = "";
+        $this->controller = null;
         $this->method = "";
         $this->params = [];
     }
