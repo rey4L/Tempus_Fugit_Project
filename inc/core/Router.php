@@ -114,9 +114,7 @@ class Router {
         );
 
         // Reset attributes
-        $this->controller = "";
-        $this->method = "";
-        $this->params = [];
+        $this->reset();
     }
 
     private function getUrl($url) {
@@ -163,6 +161,6 @@ class Router {
     private function reset() {
         $this->controller = "";
         $this->method = "";
-        $this->params = "";
+        $this->params = [];
     }
 }
