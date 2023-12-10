@@ -99,13 +99,12 @@ class Router {
             if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) $this->loadError("401");
 
             // check authorization permissions
+            // the php intellisense gives a false error with get_class
             if(!$this->checkUserPermissions(get_class($this->controller))) $this->loadError("401");
             
         } else {
             // Redirect to the 404 page
-            $this->controller = new ErrorController();
-            $this->method = "error";
-            $this->params = ["404"];
+            $this->loadError("404");
         }
 
         // Calls the assigned controller and method
