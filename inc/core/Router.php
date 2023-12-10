@@ -2,7 +2,7 @@
 
 session_start();
 $_SESSION['user_id'] = 1;
-$_SESSION['user_role'] = 'cashier';
+$_SESSION['user_role'] = 'manager';
 
 class Router {
     private $controller = null;
@@ -55,51 +55,41 @@ class Router {
         $path = $_SERVER["REQUEST_URI"];
         $url = $this->getUrl($path);
 
-        if (count($url) === 0) { 
-            if ($this->isUserLoggedIn()) 
-                $controllerName = $this->getControllerName("register");
-            else 
-                $controllerName = $this->getControllerName("user");
+        if ($this->isUserLoggedIn()) {
+            if (count($url) === 0) { 
+                $this->setDefault("register");
+            } else {
+                $controllerName = $this->getControllerName($url[0]);
 
-            $this->getController($controllerName);
-            $this->method = "index";
-
-        } else {
-     
-            $controllerName = $this->getControllerName($url[0]);
-
-            if ($this->controllerExists($controllerName)) {
-                $this->getController($controllerName);
-                if (count($url) === 1) 
-                    $this->method = "index";
-                else 
-                    if (method_exists($this->controller, $url[1])) 
-                        $this->method = $url[1];
+                if ($this->controllerExists($controllerName)) {
+                    $this->getController($controllerName);
+                    if (count($url) === 1) 
+                        $this->method = "index";
                     else 
-                        $this->method = "";
-            } else $this->reset();
-        } 
+                        if (method_exists($this->controller, $url[1])) 
+                            $this->method = $url[1];
+                        else 
+                            $this->method = "";
+                } else $this->reset();
+            } 
 
-        if ($this->controller !== null && $this->method !== "") {
-            if (!empty($url[2])) 
-                $this->params = [$url[2]];
+            if ($this->controller !== null && $this->method !== "") {
+                if (!empty($url[2])) 
+                    $this->params = [$url[2]];
+                
+                if (METHOD === POST && !in_array($this->method, $this->validPostPaths)) 
+                    $this->loadError("401");
+
+                if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) 
+                    $this->loadError("401");
             
-            if (METHOD === POST && !in_array($this->method, $this->validPostPaths)) 
-                $this->loadError("401");
-
-            if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) 
-                $this->loadError("401");
-         
-            if(!$this->checkUserPermissions(get_class($this->controller))) 
-                $this->loadError("401");
-            
-        } else $this->loadError("404");
-
-        call_user_func_array(
-            [$this->controller, $this->method], 
-            $this->params
-        );
-
+                if(!$this->checkUserPermissions(get_class($this->controller))) 
+                    $this->loadError("401");
+                
+            } else $this->loadError("404");
+        } else $this->setDefault("user");
+        
+        $this->callController();
         $this->reset();
     }
 
@@ -128,7 +118,7 @@ class Router {
     }
 
     private function checkUserPermissions($controllerName) {
-
+        
         if($_SESSION['user_role'] == 'cashier') 
             return in_array($controllerName, $this->validCashierControllers);
         
@@ -147,5 +137,18 @@ class Router {
         $this->controller = null;
         $this->method = "";
         $this->params = [];
+    }
+
+    private function callController() {
+        call_user_func_array(
+            [$this->controller, $this->method], 
+            $this->params
+        );
+    }
+
+    private function setDefault($controllerName) {
+        $controllerName = $this->getControllerName($controllerName);
+        $this->getController($controllerName);
+        $this->method = "index";
     }
 }
