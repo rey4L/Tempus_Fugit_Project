@@ -11,6 +11,14 @@ class Database {
     protected $connection;
 
     private $create_statements = [
+        "CREATE TABLE IF NOT EXISTS User(
+            id                  INT AUTO_INCREMENT,
+            email               VARCHAR(100) NOT NULL,
+            password            VARCHAR(100) NOT NULL,
+            role                ENUM('manager', 'cashier') NOT NULL,
+            employee_id         INT,
+            FOREIGN KEY         (employee_id) REFERENCES Employee(id) ON DELETE CASCADE,
+        );",
         "CREATE TABLE IF NOT EXISTS Bill(
             id                  INT AUTO_INCREMENT,
             number_of_items     INT(20) NOT NULL,
@@ -35,7 +43,7 @@ class Database {
             name                VARCHAR(100) NOT NULL,
             price               FLOAT(25, 5) NOT NULL,
             total               FLOAT(25, 5) NOT NULL,
-            amount              INT(20) NOT NULL,
+            amount              INT NOT NULL,
             discount            FLOAT(2, 2),
             bill_id             INT NOT NULL,
             menu_item_id        INT NOT NULL,
@@ -49,9 +57,9 @@ class Database {
             last_name           VARCHAR(30) NOT NULL,
             other_names         VARCHAR(100),
             gender              BOOLEAN,
-            age                 INT(20),
+            age                 INT,
             dob                 DATE,
-            job_role            ENUM('clerk', 'manager', 'cook', 'server') NOT NULL,
+            job_role            ENUM('owner',  'manager', 'cashier', 'cook', 'server') NOT NULL,
             email               VARCHAR(20) NOT NULL,
             contact_number      VARCHAR(20) NOT NULL,
             image_url           VARCHAR(100),
