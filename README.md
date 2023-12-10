@@ -1,26 +1,26 @@
 
 # Quick Setup Guide
 
-1. **Extract** the `Tempus_Fugit` folder into the `htdocs` directory or use `git clone` to clone the repository from <https://github.com/ShivMoh/Tempus_Fugit.git> into `htdocs`.
+1. **Extract** the `Tempus_Fugit_Project` folder into the `htdocs` directory or use `git clone` to clone the repository from <https://github.com/ShivMoh/Tempus_Fugit.git> into `htdocs`.
 2. **Start** php and MySQL in XAMMP.
 3. **Create** a database named `karens_kitchen` in PhpMyAdmin.
-4. **Navigate** to the `/Tempus_Fugit` directory.
+4. **Navigate** to the `/Tempus_Fugit_Project` directory.
 
 ## Configuration Settings
 
 To run the project in a subdirectory within `htdocs`, adjust the global variables `BASE_URL`, `RESOURCE_PATH`, and `CSS_PATH` in `inc/core/config.php`.
 
-For instance, to run the application from a subfolder named `personal` (located within `htdocs` and containing the `Tempus_Fugit` project folder), modify the global variables as follows:
+For instance, to run the application from a subfolder named `personal` (located within `htdocs` and containing the `Tempus_Fugit_Project` project folder), modify the global variables as follows:
 
 #### Example Folder Structure:
 
     htdocs
     ├── personal
-        └── Tempus_Fugit
+        └── Tempus_Fugit_Project
 
-1. `BASE_URL = "/personal/Tempus_Fugit";`
-2. `CSS_PATH = "http://localhost/personal/Tempus_Fugit/public/css/"`
-3. `RESOURCE_URL = "http://localhost/personal/Tempus_Fugit/public/images/"`
+1. `BASE_URL = "/personal/Tempus_Fugit_Project";`
+2. `CSS_PATH = "http://localhost/personal/Tempus_Fugit_Project/public/css/"`
+3. `RESOURCE_URL = "http://localhost/personal/Tempus_Fugit_Project/public/images/"`
 
 Note that `inc/core/config.php` is where the configurations for the database are set. If desirable, go here to change database settings.
 
