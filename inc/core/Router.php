@@ -9,12 +9,10 @@ class Router {
     private $method = '';
     private $params = [];
 
-    // Valid controller methods for GET requests
     private $validGetPaths = [
         "index",
     ];
 
-    // Valid controller methods for POST requests
     private $validPostPaths = [
         "findAll",
         "view",
@@ -58,8 +56,10 @@ class Router {
         $url = $this->getUrl($path);
 
         if (count($url) === 0) { 
-            if($this->isUserLoggedIn()) $controllerName = $this->getControllerName("Register");
-            else $controllerName = $this->getControllerName("User");
+            if($this->isUserLoggedIn()) 
+                $controllerName = $this->getControllerName("Register");
+            else 
+                $controllerName = $this->getControllerName("User");
 
             $this->getController($controllerName);
             $this->method = "index";
@@ -69,21 +69,28 @@ class Router {
 
             if ($this->controllerExists($this->controller)) {
                 $this->getController($this->controller);
-                if (count($url) === 1) $this->method = "index";
+                if (count($url) === 1) 
+                    $this->method = "index";
                 else 
-                    if (method_exists($this->controller, $url[1])) $this->method = $url[1];
-                    else $this->method = "";
+                    if (method_exists($this->controller, $url[1])) 
+                        $this->method = $url[1];
+                    else 
+                        $this->method = "";
             } else $this->reset();
         } 
 
         if ($this->controller !== "" && $this->method !== "") {
-            if (!empty($url[2])) $this->params = [$url[2]];
+            if (!empty($url[2])) 
+                $this->params = [$url[2]];
             
-            if (METHOD === POST && !in_array($this->method, $this->validPostPaths)) $this->loadError("401");
+            if (METHOD === POST && !in_array($this->method, $this->validPostPaths)) 
+                $this->loadError("401");
 
-            if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) $this->loadError("401");
+            if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) 
+                $this->loadError("401");
          
-            if(!$this->checkUserPermissions(get_class($this->controller))) $this->loadError("401");
+            if(!$this->checkUserPermissions(get_class($this->controller))) 
+                $this->loadError("401");
             
         } else $this->loadError("404");
 
@@ -121,13 +128,12 @@ class Router {
 
     private function checkUserPermissions($controllerName) {
 
-        if($_SESSION['user_role'] == 'cashier') {
+        if($_SESSION['user_role'] == 'cashier') 
             return in_array($controllerName, $this->validCashierControllers);
-        }
-
-        if($_SESSION['user_role'] == 'manager') {
+        
+        if($_SESSION['user_role'] == 'manager') 
             return in_array($controllerName, $this->validManagerControllers);
-        }
+        
     }
 
     private function loadError($errorCode) {
