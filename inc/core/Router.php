@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+$_SESSION['user_id'] = 1;
+$_SESSION['user_role'] = 'manager';
+
 class Router {
     private $controller = '';
     private $method = '';
@@ -23,7 +27,26 @@ class Router {
         "index",
         "filterByStatus",
         "filterByDate",
-        "searchById"
+        "searchById",
+        "login",
+        "logout",
+        "register"
+    ];
+
+    
+    private $validCashierControllers = [
+        "UserController",
+        "RegisterController",
+        "ErrorController"
+    ];
+
+    private $validManagerControllers = [
+        "BillController",
+        "MenuItemController",
+        "EmployeeController",
+        "MenuItemController",
+        "RegisterController",
+        "ErrorController"
     ];
 
     public function __construct() {
@@ -36,12 +59,19 @@ class Router {
 
         // Default controller and method when the app starts
         if (count($url) === 0) { 
-            $this->controller = $this->getControllerName("Register");
+            
+            if($this->isUserLoggedIn()) {
+                $this->controller = $this->getControllerName("Register");
+            } else {
+                $this->controller = $this->getControllerName("User");
+            }
+
             $this->getController($this->controller);
             $this->method = "index";
+
         } else {
             $this->controller = $this->getControllerName($url[0]);
-        
+
             if ($this->controllerExists($this->controller)) {
                 $this->getController($this->controller);
     
@@ -54,33 +84,23 @@ class Router {
                         $this->method = "";
                     }
                 }
-            } else {
-                $this->controller = "";
-                $this->method = "";
-                $this->params = "";
-            }
+            } else $this->reset();
         } 
 
         if ($this->controller !== "" && $this->method !== "") {
-            if (!empty($url[2])) {
-                $this->params = [$url[2]];
-            }
-            
+            if (!empty($url[2])) $this->params = [$url[2]];
+
             // Decisions based on HTTP requests
-            
+
             // If the request is POST but not a valid post request path, then return an error
-            if (METHOD === POST && !in_array($this->method, $this->validPostPaths)) {
-                $this->controller = new ErrorController();
-                $this->method = "error";
-                $this->params = ["401"];
-            }
+            if (METHOD === POST && !in_array($this->method, $this->validPostPaths)) $this->loadError("401");
 
             // If the request is GET but not a valid get request path, then return an error
-            if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) {
-                $this->controller = new ErrorController();
-                $this->method = "error";
-                $this->params = ["401"];
-            }
+            if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) $this->loadError("401");
+
+            // check authorization permissions
+            if(!$this->checkUserPermissions(get_class($this->controller))) $this->loadError("401");
+            
         } else {
             // Redirect to the 404 page
             $this->controller = new ErrorController();
@@ -118,5 +138,32 @@ class Router {
     private function controllerExists($filename) {
         $filename = __DIR__."/../controller/controllers/".$filename.".php";
         return file_exists($filename);
+    }
+
+    private function isUserLoggedIn() {
+        return isset($_SESSION['user_id']) && isset($_SESSION['user_role']);
+    }
+
+    private function checkUserPermissions($controllerName) {
+
+        if($_SESSION['user_role'] == 'cashier') {
+            return in_array($controllerName, $this->validCashierControllers);
+        }
+
+        if($_SESSION['user_role'] == 'manager') {
+            return in_array($controllerName, $this->validManagerControllers);
+        }
+    }
+
+    private function loadError($errorCode) {
+        $this->controller = new ErrorController();
+        $this->method = "error";
+        $this->params = [$errorCode];
+    }
+
+    private function reset() {
+        $this->controller = "";
+        $this->method = "";
+        $this->params = "";
     }
 }
