@@ -44,7 +44,8 @@ class Router {
         "EmployeeController",
         "MenuItemController",
         "RegisterController",
-        "ErrorController"
+        "ErrorController",
+        "TestController"
     ];
 
     public function __construct() {

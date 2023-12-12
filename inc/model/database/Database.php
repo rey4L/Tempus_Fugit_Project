@@ -23,6 +23,7 @@ class Database {
             id                  INT AUTO_INCREMENT,
             name                VARCHAR(100) NOT NULL,
             price               FLOAT(25, 5) NOT NULL,
+            cost_to_produce     FLOAT(25, 5) NOT NULL,
             description         TEXT,
             image               VARCHAR(100),
             discount            FLOAT(2, 2),
@@ -70,8 +71,8 @@ class Database {
     ];
 
     private $initMenuItemSQL =
-        "INSERT INTO MenuItem(name, price, description, image, discount, tags, ingredients)
-         VALUES (:name, :price, :description, :image, :discount, :tags, :ingredients)
+        "INSERT INTO MenuItem(name, price, cost_to_produce, description, image, discount, tags, ingredients)
+         VALUES (:name, :price, :cost_to_produce, :description, :image, :discount, :tags, :ingredients)
         ";
 
     private $initEmployeeDataSQL =
@@ -117,6 +118,7 @@ class Database {
             [
                 'name' => 'Chocolate Chip Ice Cream',
                 'price' => 1000,
+                'cost_to_produce' => 500,
                 'description' => 'Creamy vanilla ice cream with swirls of chocolate chips.',
                 'image' => 'chocolate-chip-ice-cream.png',
                 'discount' => 0.15,
@@ -126,6 +128,7 @@ class Database {
             [
                 'name' => 'Strawberry Swirl Sundae',
                 'price' => 1500,
+                'cost_to_produce' => 1000,
                 'description' => 'Fresh strawberries layered with vanilla ice cream and topped with whipped cream.',
                 'image' => 'strawberry-swirl-sundae.png',
                 'discount' => 0.20,
