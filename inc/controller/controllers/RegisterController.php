@@ -50,9 +50,8 @@ class RegisterController extends BaseController {
         
         // debating this
         if (!$this->validator->validateNumberOfItems($amount)) {
-            echo '<script>alert("Number of items must be greater than 1 and less than 0")</script>';
+            $this->error("The amount value must be between 1 and 50. Please do not alter the webpage!");
             $this->index();
-            return;
         }
         
         $discount = $this->registerManager->queryDiscountForMenuItem($menu_id);

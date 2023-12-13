@@ -17,4 +17,6 @@ require __DIR__."/validators/Errors.php";
 require __DIR__."/validators/Validator.php";
 require __DIR__."/validators/FilterValidator.php";
 require __DIR__."/validators/RegisterValidator.php";
+require __DIR__."/validators/EmployeeValidator.php";
+require __DIR__."/validators/MenuItemValidator.php";
 
