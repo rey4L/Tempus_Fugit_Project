@@ -8,10 +8,12 @@ class RegisterController extends BaseController {
 
     private $registerManager;
     private $billItemModel;
+    private $validator;
 
     public function __construct() {
         $this->registerManager = new RegisterManager();
         $this->billItemModel = new BillItemModel();
+        $this->validator = new RegisterValidator();
     }
 
     public function index() {
@@ -36,9 +38,22 @@ class RegisterController extends BaseController {
     }
 
     public function create() {
-        list($name, $menu_id) = explode(",", $_POST['name']);
-        $amount = $_POST['amount'];
-       
+        list(
+            $name, 
+            $menu_id) = explode(",", $_POST['name']);
+
+        list(
+            $name, 
+            $menu_id) = $this->validator->sanitize($name, $menu_id);
+
+        $amount = $this->validator->sanitize($_POST['amount']);
+        
+        // debating this
+        if (!$this->validator->validateNumberOfItems($amount)) {
+            $this->error("The amount value must be between 1 and 50. Please do not alter the webpage!");
+            $this->index();
+        }
+        
         $discount = $this->registerManager->queryDiscountForMenuItem($menu_id);
         $price = $this->registerManager->queryPriceForMenuItem($menu_id);
         $total = ($amount * $price) - ($discount * ($price * $amount));

@@ -10,4 +10,5 @@ interface Controller {
     public function findOne($id);
     public function delete($id);
     public function update($id);
+    public function error($message);
 } 

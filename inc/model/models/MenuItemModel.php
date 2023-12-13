@@ -4,6 +4,7 @@ class MenuItemModel extends BaseModel {
     private $id;
     private $name;
     private $price;
+    private $cost_to_produce;
     private $description;
     private $image;
     private $discount;
@@ -15,12 +16,13 @@ class MenuItemModel extends BaseModel {
     }
 
     public function create() {
-        $sql =  "INSERT INTO MenuItem(name, price, description, image, discount, tags, ingredients)
-            VALUES (:name, :price, :description, :image, :discount, :tags, :ingredients)";
+        $sql =  "INSERT INTO MenuItem(name, price, cost_to_produce, description, image, discount, tags, ingredients)
+            VALUES (:name, :price, :cost_to_produce, :description, :image, :discount, :tags, :ingredients)";
 
         $new_menu_item = [
             "name"=> $this->name,
             "price"=> $this->price,
+            "cost_to_produce"=> $this->cost_to_produce,
             "description"=> $this->description,
             "image"=> $this->image,
             "discount"=> $this->discount,
@@ -49,12 +51,13 @@ class MenuItemModel extends BaseModel {
     }
 
     public function update() {
-        $sql = "UPDATE MenuItem SET name = :name, price = :price, description = :description, image = :image, discount = :discount, tags = :tags, ingredients = :ingredients WHERE id = :id";
+        $sql = "UPDATE MenuItem SET name = :name, price = :price, cost_to_produce = :cost_to_produce, description = :description, image = :image, discount = :discount, tags = :tags, ingredients = :ingredients WHERE id = :id";
     
         $updated_menu_item = [
             "id"=> $this->id,
             "name"=> $this->name,
             "price"=> $this->price,
+            "cost_to_produce"=> $this->cost_to_produce,
             "description"=> $this->description,
             "image"=> $this->image,
             "discount"=> $this->discount,
@@ -89,6 +92,10 @@ class MenuItemModel extends BaseModel {
         return $this->price;
     }
 
+    public function get_cost_to_produce() {
+        return $this->cost_to_produce;
+    }
+
     public function get_description() {
         return $this->description;
     }
@@ -119,6 +126,10 @@ class MenuItemModel extends BaseModel {
 
     public function set_price($price) {
         $this->price = $price;
+    }
+
+    public function set_cost_to_produce($cost_to_produce) {
+        $this->cost_to_produce = $cost_to_produce;
     }
 
     public function set_description($description) {
