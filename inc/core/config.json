@@ -1,0 +1,37 @@
+{
+    "GET" : [
+        "index"
+    ],
+    "POST" : [
+        "findAll",
+        "view",
+        "create",
+        "update",
+        "delete",
+        "findOne",
+        "anchor",
+        "error",
+        "index",
+        "filterByStatus",
+        "filterByDate",
+        "searchById",
+        "login",
+        "logout",
+        "register"
+    ],
+    "CASHIER" : [
+        "UserController",
+        "RegisterController",
+        "ErrorController"
+    ],
+    "MANAGER" : [
+        "BillController",
+        "MenuItemController",
+        "EmployeeController",
+        "MenuItemController",
+        "RegisterController",
+        "ErrorController",
+        "TestController"
+    ]
+
+}

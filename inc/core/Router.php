@@ -5,50 +5,26 @@ $_SESSION['user_id'] = 1;
 $_SESSION['user_role'] = 'manager';
 
 class Router {
+
     private $controller = null;
     private $method = "";
     private $params = [];
-
-    private $validGetPaths = [
-        "index",
-    ];
-
-    private $validPostPaths = [
-        "findAll",
-        "view",
-        "create",
-        "update",
-        "delete",
-        "findOne",
-        "anchor",
-        "error",
-        "index",
-        "filterByStatus",
-        "filterByDate",
-        "searchById",
-        "login",
-        "logout",
-        "register"
-    ];
-
-    
-    private $validCashierControllers = [
-        "UserController",
-        "RegisterController",
-        "ErrorController"
-    ];
-
-    private $validManagerControllers = [
-        "BillController",
-        "MenuItemController",
-        "EmployeeController",
-        "MenuItemController",
-        "RegisterController",
-        "ErrorController",
-        "TestController"
-    ];
+    private $validGetPaths = [];
+    private $validPostPaths = [];
+    private $validCashierControllers = [];
+    private $validManagerControllers = [];
 
     public function __construct() {
+        
+        $jsonConfig = json_decode(
+            file_get_contents(__DIR__."/config.json"), true
+        );
+    
+        $this->validPostPaths = $jsonConfig["POST"];
+        $this->validGetPaths = $jsonConfig["GET"];
+        $this->validCashierControllers = $jsonConfig["CASHIER"];
+        $this->validManagerControllers = $jsonConfig["MANAGER"];
+  
         $this->loadController();
     }
     
@@ -101,7 +77,6 @@ class Router {
     }
 
     private function getController($controller = "") {
-        require __DIR__."/../controller/controllers/".$controller.".php";
         $this->controller = new $controller();
     }
 

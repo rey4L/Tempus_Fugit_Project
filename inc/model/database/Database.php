@@ -29,6 +29,7 @@ class Database {
             discount            FLOAT(2, 2),
             tags                VARCHAR(100),
             ingredients         VARCHAR(100),
+            stock_count         INT,
             PRIMARY KEY         (id)
         );",
         "CREATE TABLE IF NOT EXISTS BillItem(
