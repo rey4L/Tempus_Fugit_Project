@@ -51,7 +51,7 @@ class RegisterManager {
         $this->billModel->set_customer("");
         $this->billModel->set_number_of_items(0);
         $this->billModel->set_total_cost(0);
-        $this->billModel->set_order_date("");
+        $this->billModel->set_order_date(NULL);
         $this->billModel->set_status("empty");
         $this->billModel->create();
     }
