@@ -48,7 +48,7 @@ class RegisterController extends BaseController {
 
         $amount = $this->validator->sanitize($_POST['amount']);
         
-        // debating this
+
         if (!$this->validator->validateNumberOfItems($amount)) {
             $this->error("The amount value must be between 1 and 50. Please do not alter the webpage!");
             $this->index();
