@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <form id="employee-back-form" class="employee-back-form" action=<?=BASE_URL."/employee"?> method="POST"></form>
-    <form id="employee-registration-form" class="employee-registration-form" action="<?=BASE_URL."/employee/create"?>" method="post">
+    <form id="register-back-form" class="register-back-form" action=<?=BASE_URL."/employee"?> method="POST"></form>
+    <form id="registration-form" class="registration-form" action="<?=BASE_URL."/employee/create"?>" method="post">
         <p class="form-name-text">
             USER REGISTRATION
         </p>
@@ -36,8 +36,8 @@
         <label for="employee-id">Employee ID</label>
         <input type="text" name="employee-id" required>
 
-        <button type="submit" form="employee-registration-form">Submit</button>
-        <button type="submit" class="employee-add-back-button" form="employee-back-form">Back To List</button>
+        <button type="submit" form="registration-form">Submit</button>
+        <button type="submit" class="registration-add-back-button" form="registration-back-form">Back To List</button>
     </form>
  
 </body>
