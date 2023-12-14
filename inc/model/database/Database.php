@@ -54,7 +54,7 @@ class Database {
             gender              BOOLEAN,
             age                 INT,
             dob                 DATE,
-            job_role            ENUM('owner',  'manager', 'cashier', 'cook', 'server') NOT NULL,
+            job_role            ENUM('owner',  'manager', 'cashier', 'cook', 'server','clerk') NOT NULL,
             email               VARCHAR(20) NOT NULL,
             contact_number      VARCHAR(20) NOT NULL,
             image_url           VARCHAR(100),
@@ -80,7 +80,7 @@ class Database {
     private $initEmployeeDataSQL =
         "INSERT INTO Employee(first_name, last_name, other_names, gender, age, dob, job_role, email, contact_number, image_url, status)
          VALUES (:first_name, :last_name, :other_names, :gender, :age, :dob, :job_role, :email, :contact_number, :image_url, :status)
-        ";
+        "; 
 
     public function connect() {
         $driver = DB_DRIVER;
