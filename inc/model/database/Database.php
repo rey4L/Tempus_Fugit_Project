@@ -30,6 +30,7 @@ class Database {
             tags                VARCHAR(100),
             ingredients         VARCHAR(100),
             stock_count         INT,
+            items_sold          INT,
             PRIMARY KEY         (id)
         );",
         "CREATE TABLE IF NOT EXISTS BillItem(

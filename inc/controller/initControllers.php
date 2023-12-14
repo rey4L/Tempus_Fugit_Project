@@ -11,6 +11,7 @@ require __DIR__."/controllers/MenuItemController.php";
 require __DIR__."/controllers/RegisterController.php";
 require __DIR__."/controllers/EmployeeController.php";
 require __DIR__."/controllers/BillController.php";
+require __DIR__."/controllers/TestController.php";
 
 // include validators
 require __DIR__."/validators/Errors.php";

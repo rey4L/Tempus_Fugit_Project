@@ -3,9 +3,11 @@
 class MenuItemController extends BaseController {
 
     private $model;
+    private $validator;
 
     public function __construct() {
         $this->model = new MenuItemModel();
+        $this->validator = new MenuItemValidator();
     }
 
     public function index() {
@@ -14,14 +16,26 @@ class MenuItemController extends BaseController {
     }
 
     public function create() {
- 
-        $name = $_POST['name'];
-        $price = $_POST['price'];
-        $description = $_POST['description'];
-        $image = $_POST['image'];
-        $discount = $_POST['discount'];
-        $tags = $_POST['tags'];
-        $ingredients = $_POST['ingredients'];
+        
+        list(
+            
+            $name,
+            $price,
+            $description,
+            $image,
+            $discount,
+            $tags,
+            $ingredients
+
+        ) = $this->validator->sanitize(
+            $_POST['name'],
+            $_POST['price'],
+            $_POST['description'],
+            $_POST['image'],
+            $_POST['discount'],
+            $_POST['tags'],
+            $_POST['ingredients']
+        );
 
         $this->model->set_name($name);
         $this->model->set_price($price);
@@ -64,6 +78,18 @@ class MenuItemController extends BaseController {
 
         $this->model->update();
         $this->anchor("menuitem");
+    }
+
+    public function showMostSoldItems() {
+        // get the data from the model
+
+        // $this->view(viewName, data)
+    }
+
+    public function showMostProfitableItems() {
+        // get the data from the model
+
+        // $this->view(viewName, data)
     }
 
     // filter and search options 
