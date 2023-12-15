@@ -11,7 +11,6 @@ class EmployeeController extends BaseController {
     }
 
     public function index() {
-        var_dump($this->validator->validateOtherNames("sfndsflnds sflnsdnfdsnf sflsdnfndslfnd"));
        $this->findAll();
     }
 
