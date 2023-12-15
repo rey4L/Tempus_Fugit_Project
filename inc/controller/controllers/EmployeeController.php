@@ -11,6 +11,7 @@ class EmployeeController extends BaseController {
     }
 
     public function index() {
+        var_dump($this->validator->validateOtherNames("sfndsflnds sflnsdnfdsnf sflsdnfndslfnd"));
        $this->findAll();
     }
 
@@ -42,20 +43,18 @@ class EmployeeController extends BaseController {
             $_POST['email'],
             $_POST['contact-number']
         );
-
-        $validatedFirstName = $this->validator->validateName($firstName);
-        $validatedLastName = $this->validator->validateName($lastName);
-        $validatedOtherNames = $this->validator->validateName($otherNames);
-        $validatedGender = $this->validator->validateGender($gender);
-        $validatedAge = $this->validator->validateAge($age);
-        $validatedDob = $this->validator->validateDob($dob);
-        $validatedJobRole = $this->validator->validateJobRole($jobRole);
-        $validatedEmail = $this->validator->validateEmail($email);
-        $validatedContactNumber = $this->validator->validateNumber($contactNumber);
- 
-        if (!$validatedFirstName || !$validatedGender || !$validatedAge || !$validatedDob || !$validatedJobRole || !$validatedEmail || !$validatedContactNumber) {
-            echo "error";
-        } else {
+        
+        if (!$this->validateInputs(
+            $firstName,
+            $lastName,
+            $otherNames,
+            $gender,
+            $age,
+            $dob,
+            $jobRole,
+            $email,
+            $contactNumber
+        )) return;
 
         $this->model->set_first_name($firstName);
         $this->model->set_last_name($lastName);
@@ -70,7 +69,6 @@ class EmployeeController extends BaseController {
 
         $this->model->create();
         $this->anchor("employee");
-        }
     }
 
     public function findOne($id) {
@@ -80,7 +78,6 @@ class EmployeeController extends BaseController {
     }
 
     // filter and search options
-
     public function searchById() {
         $this->model->set_id($_POST['search-query']);
         $data = $this->model->findById();
@@ -91,5 +88,65 @@ class EmployeeController extends BaseController {
         $this->model->set_status($_POST['status']);
         $data = $this->model->findAllByStatus();
         $this->view("employee/EmployeesTab", $data = $data);
+    }
+
+    private function validateInputs($firstName, $lastName, $otherNames, $gender, $age, $dob, $jobRole, $email, $contactNumber) {
+        switch (false) {
+            case $this->validator->isString($firstName):
+                $this->error("First name is not of type string");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            case $this->validator->isString($lastName):
+                $this->error("Last name is not of type string");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            case $this->validator->validateOtherNames($otherNames):
+                $this->error("Other names is not valid. Please input in correct string format!");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            case $this->validator->validateGender($gender):
+                $this->error("Gender must be either Male or Female");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            case $this->validator->validateAge($age):
+                $this->error("Employee must be between (inclusive of) 18 and 70");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            case $this->validator->validateDob($dob):
+                $this->error("Date of Birth is not it valid format: yyyy-mm-dd");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            case $this->validator->validateDobAndAge($dob, $age):
+                $this->error("Inputted Age: $age does not match DOB: $dob");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            case $this->validator->validateJobRole($jobRole):
+                $this->error("Job role of type $jobRole does not exist!");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            case $this->validator->validateEmail($email):
+                $this->error("Email is not valid!");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            case $this->validator->validatePhoneNumber($contactNumber):
+                $this->error("Contact number is not valid! A seven digit guyanese number is required.");
+                $this->view("employee/EmployeeAdd");
+                return false;
+                break;
+            default:
+                return true;
+                break;
+        }
+
+        return true;
     }
 }

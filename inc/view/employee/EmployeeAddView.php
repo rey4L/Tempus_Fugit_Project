@@ -50,7 +50,7 @@
         <input type="email" name="email" required>
 
         <label for="contact-number">Contact Number</label>
-        <input type="text" name="contact-number" required>
+        <input type="text" name="contact-number">
 
         <label for="image-url">Image URL</label>
         <input type="text" name="image-url">
