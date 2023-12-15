@@ -10,14 +10,17 @@ class MenuItemModel extends BaseModel {
     private $discount;
     private $tags;
     private $ingredients;
+    private $stock_count;
+    private $items_sold;
+    private $profit_generated;
 
     public function __construct() {
         $this->connect();
     }
 
     public function create() {
-        $sql =  "INSERT INTO MenuItem(name, price, cost_to_produce, description, image, discount, tags, ingredients)
-            VALUES (:name, :price, :cost_to_produce, :description, :image, :discount, :tags, :ingredients)";
+        $sql =  "INSERT INTO MenuItem(name, price, cost_to_produce, description, image, discount, tags, ingredients, stock_count, items_sold, profit_generated)
+            VALUES (:name, :price, :cost_to_produce, :description, :image, :discount, :tags, :ingredients, :stock_count, :items_sold, :profit_generated)";
 
         $new_menu_item = [
             "name"=> $this->name,
@@ -27,7 +30,10 @@ class MenuItemModel extends BaseModel {
             "image"=> $this->image,
             "discount"=> $this->discount,
             "tags"=> $this->tags,
-            "ingredients"=> $this->ingredients
+            "ingredients"=> $this->ingredients,
+            "stock_count"=> $this->stock_count,
+            "items_sold"=> $this->items_sold,
+            "profit_generated"=> $this->profit_generated
         ];
 
         $statement = $this->connection->prepare($sql);
@@ -50,8 +56,18 @@ class MenuItemModel extends BaseModel {
         return $statement->fetch();
     }
 
+    public function findAllByItemsSold() {
+        $statement = $this->connection->query("SELECT * FROM MenuItem ORDER BY items_sold DESC");
+        return $statement->fetchAll(); 
+    }
+
+    public function findAllByMostProfitGenerated() {
+        $statement = $this->connection->query("SELECT * FROM MenuItem ORDER BY profit_generated DESC");
+        return $statement->fetchAll(); 
+    }
+
     public function update() {
-        $sql = "UPDATE MenuItem SET name = :name, price = :price, cost_to_produce = :cost_to_produce, description = :description, image = :image, discount = :discount, tags = :tags, ingredients = :ingredients WHERE id = :id";
+        $sql = "UPDATE MenuItem SET name = :name, price = :price, cost_to_produce = :cost_to_produce, description = :description, image = :image, discount = :discount, tags = :tags, ingredients = :ingredients, stock_count = :stock_count, items_sold = :items_sold, profit_generated = :profit_generated WHERE id = :id";
     
         $updated_menu_item = [
             "id"=> $this->id,
@@ -62,7 +78,10 @@ class MenuItemModel extends BaseModel {
             "image"=> $this->image,
             "discount"=> $this->discount,
             "tags"=> $this->tags,
-            "ingredients"=>$this->ingredients
+            "ingredients"=>$this->ingredients,
+            "stock_count"=> $this->stock_count,
+            "items_sold"=> $this->items_sold,
+            "profit_generated"=> $this->profit_generated
         ];
 
         $statement = $this->connection->prepare($sql);
@@ -79,6 +98,8 @@ class MenuItemModel extends BaseModel {
         $statement = $this->connection->prepare($sql);
         $statement->execute($deleted_menu_item);
     }
+
+
 
     public function get_id() {
         return $this->id;
@@ -110,6 +131,18 @@ class MenuItemModel extends BaseModel {
 
     public function get_tags() {
         return $this->tags;
+    }
+
+    public function get_stock_count() {
+        return $this->stock_count;
+    }
+
+    public function get_items_sold() {
+        return $this->items_sold;
+    }
+    
+    public function get_profit_generated() {
+        return $this->profit_generated;
     }
 
     public function get_ingredients() {
@@ -150,5 +183,17 @@ class MenuItemModel extends BaseModel {
 
     public function set_ingredients($ingredients) {
         $this->ingredients = $ingredients;
+    }
+
+    public function set_stock_count($stock_count) {
+        $this->stock_count = $stock_count;
+    }
+
+    public function set_items_sold($items_sold) {
+        $this->items_sold = $items_sold;
+    }
+
+    public function set_profit_generated($profit_generated) {
+        $this->profit_generated = $profit_generated;
     }
 }

@@ -12,6 +12,7 @@ class EmployeeModel extends BaseModel {
     private $job_role;
     private $email;
     private $contact_number;
+    private $image_url;
     private $status;
 
     public function __construct() {
@@ -20,8 +21,8 @@ class EmployeeModel extends BaseModel {
 
     public function create() {
    
-        $sql =  "INSERT INTO Employee(first_name, last_name, other_names, gender, age, dob, job_role, email, contact_number, status)
-            VALUES (:first_name,:last_name, :other_names, :gender, :age, :dob, :job_role, :email, :contact_number, :status)";
+        $sql =  "INSERT INTO Employee(first_name, last_name, other_names, gender, age, dob, job_role, email, contact_number, image_url, status)
+            VALUES (:first_name,:last_name, :other_names, :gender, :age, :dob, :job_role, :email, :contact_number, :image_url, :status)";
 
         $new_employee = [
             "first_name"=> $this->first_name,
@@ -33,6 +34,7 @@ class EmployeeModel extends BaseModel {
             "job_role"=> $this->job_role,
             "email"=> $this->email,
             "contact_number"=> $this->contact_number,
+            "image_url"=>$this->image_url,
             "status"=>$this->status
         ];
 
@@ -58,7 +60,7 @@ class EmployeeModel extends BaseModel {
 
     public function update() {
    
-        $sql = "UPDATE Employee SET first_name = :first_name, last_name = :last_name, other_names = :other_names, gender = :gender, age = :age, dob = :dob, job_role = :job_role, email = :email, contact_number = :contact_number, status = :status WHERE id = :id";
+        $sql = "UPDATE Employee SET first_name = :first_name, last_name = :last_name, other_names = :other_names, gender = :gender, age = :age, dob = :dob, job_role = :job_role, email = :email, contact_number = :contact_number, image_url = :image_url, status = :status WHERE id = :id";
         
         $updated_employee = [
             "id"=> $this->id,
@@ -71,6 +73,7 @@ class EmployeeModel extends BaseModel {
             "job_role"=> $this->job_role,
             "email"=> $this->email,
             "contact_number"=> $this->contact_number,
+            "image_url"=>$this->image_url,
             "status"=>$this->status
         ];
     

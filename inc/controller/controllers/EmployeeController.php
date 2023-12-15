@@ -67,7 +67,6 @@ class EmployeeController extends BaseController {
         $this->model->set_status("active");
 
         $this->model->create();
-        $this->anchor("employee");
     }
 
     public function findOne($id) {

@@ -31,6 +31,7 @@ class Database {
             ingredients         VARCHAR(100),
             stock_count         INT,
             items_sold          INT,
+            profit_generated    FLOAT(25, 5),
             PRIMARY KEY         (id)
         );",
         "CREATE TABLE IF NOT EXISTS BillItem(
@@ -72,10 +73,11 @@ class Database {
         );"
     ];
 
+    
+
     private $initMenuItemSQL =
-        "INSERT INTO MenuItem(name, price, cost_to_produce, description, image, discount, tags, ingredients)
-         VALUES (:name, :price, :cost_to_produce, :description, :image, :discount, :tags, :ingredients)
-        ";
+     "INSERT INTO MenuItem(name, price, cost_to_produce, description, image, discount, tags, ingredients, stock_count, items_sold, profit_generated)
+    VALUES (:name, :price, :cost_to_produce, :description, :image, :discount, :tags, :ingredients, :stock_count, :items_sold, :profit_generated)";
 
     private $initEmployeeDataSQL =
         "INSERT INTO Employee(first_name, last_name, other_names, gender, age, dob, job_role, email, contact_number, image_url, status)
@@ -125,7 +127,10 @@ class Database {
                 'image' => 'chocolate-chip-ice-cream.png',
                 'discount' => 0.15,
                 'tags' => 'chocolate, dessert',
-                'ingredients' => 'ice cream, chocolate chip, chocolate syrup'
+                'ingredients' => 'ice cream, chocolate chip, chocolate syrup',
+                'stock_count' => 20,
+                'items_sold' => 0,
+                'profit_generated' => 0
             ],
             [
                 'name' => 'Strawberry Swirl Sundae',
@@ -135,7 +140,10 @@ class Database {
                 'image' => 'strawberry-swirl-sundae.png',
                 'discount' => 0.20,
                 'tags' => 'strawberry, dessert',
-                'ingredients' => 'strawberries, ice cream'
+                'ingredients' => 'strawberries, ice cream',
+                'stock_count' => 10,
+                'items_sold' => 0,
+                'profit_generated' => 0
             ]
         ];
 
