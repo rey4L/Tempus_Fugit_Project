@@ -2,7 +2,7 @@
 
 session_start();
 $_SESSION['user_id'] = 0;
-//$_SESSION['user_role'] = 'manager';
+$_SESSION['user_role'] = 'manager';
 
 class Router {
 
