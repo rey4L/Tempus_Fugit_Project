@@ -108,16 +108,6 @@ class UserModel extends BaseModel {
             $statement->execute($change_user_state);
         }
 
-        // public function getHashedPasswordbyEmail() {
-        //     $sql = "SELECT password FROM User WHERE email = :email";
-    
-        //     $statement = $this->connection->prepare($sql);
-        //     $statement->execute(['email' => $this->email] or $email);
-    
-        //     $result = $statement->fetch();
-        //     return $result['password'];
-        // }
-
         public function get_id() {
             return $this->id;
         }

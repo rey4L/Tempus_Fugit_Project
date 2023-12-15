@@ -4,15 +4,6 @@ class UserManager {
 
     private $userModel;
 
-    protected function generateSaltedPassword($password) {
-        //Generate a random 16 bit hexadecimal string
-        $salt = bin2hex(random_bytes(8));
-        
-        //Prepend the string to the password
-        $salted_password = $salt.$password;
-        return $salted_password;
-    }
-
     public function __construct() {
         $this->userModel = new UserModel();
     }
@@ -22,8 +13,6 @@ class UserManager {
         $this->userModel->set_password($password);        
         $this->userModel->set_role("cashier");
         $this->userModel->set_employee_id($employee_id);
-
-        // $salted_password = $this->generateSaltedPassword($this->userModel->get_password());
 
         $this->userModel->set_password(
             password_hash($password, PASSWORD_DEFAULT)
@@ -37,8 +26,6 @@ class UserManager {
         $this->userModel->set_password($password);
         $this->userModel->set_role("manager");
         $this->userModel->set_employee_id($employee_id);
-
-        // $salted_password = $this->generateSaltedPassword($this->userModel->get_password());
 
         $this->userModel->set_password(
             password_hash($password, PASSWORD_DEFAULT)
