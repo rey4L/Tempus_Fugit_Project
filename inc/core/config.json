@@ -1,6 +1,7 @@
 {
     "GET" : [
-        "index"
+        "index",
+        "registerPage"        
     ],
     "POST" : [
         "findAll",
@@ -25,6 +26,7 @@
         "ErrorController"
     ],
     "MANAGER" : [
+        "UserController",
         "BillController",
         "MenuItemController",
         "EmployeeController",

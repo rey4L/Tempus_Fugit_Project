@@ -9,8 +9,7 @@
 </head>
 
 <body>
-    <form id="register-back-form" class="register-back-form" action=<?=BASE_URL."/employee"?> method="POST"></form>
-    <form id="registration-form" class="registration-form" action="<?=BASE_URL."/employee/create"?>" method="post">
+    <form id="registration-form" class="registration-form" action="<?=BASE_URL."/User/register"?>" method="post">
         <p class="form-name-text">
             USER REGISTRATION
         </p>
@@ -29,16 +28,18 @@
 
         <label for="role">Role</label>
         <select name="role" required>
-            <option value="1">Cashier</option>
-            <option value="0">Manager</option>
+            <option value="cashier">Cashier</option>
+            <option value="manager">Manager</option>
         </select>
 
-        <label for="employee-id">Employee ID</label>
-        <input type="text" name="employee-id" required>
+        <label for="employee_id">Employee ID</label>
+        <input type="text" name="employee_id" required>
 
         <button type="submit" form="registration-form">Submit</button>
-        <button type="submit" class="registration-add-back-button" form="registration-back-form">Back To List</button>
     </form>
- 
+    <form id="registration-back-form" class="registration-back-form" action="<?=BASE_URL."/User"?>" method="post">
+         <button type="submit">Back To Login</button>
+    </form>
+
 </body>
 </html>

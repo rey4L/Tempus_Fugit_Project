@@ -11,4 +11,6 @@ interface Controller {
     public function delete($id);
     public function update($id);
     public function error($message);
+    public function findByEmail($email);
+
 } 

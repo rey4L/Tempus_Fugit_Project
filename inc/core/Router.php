@@ -1,8 +1,8 @@
 <?php
 
 session_start();
-$_SESSION['user_id'] = 1;
-$_SESSION['user_role'] = 'manager';
+$_SESSION['user_id'] = 0;
+//$_SESSION['user_role'] = 'manager';
 
 class Router {
 
@@ -34,7 +34,7 @@ class Router {
 
         if ($this->isUserLoggedIn()) {
             if (count($url) === 0) { 
-                $this->setDefault("register");
+                $this->setDefault("user");
             } else {
                 $controllerName = $this->getControllerName($url[0]);
 

@@ -41,6 +41,16 @@ class UserModel extends BaseModel {
     
             return $statement->fetch();
         }
+
+        public function findByEmail($email) {
+
+            $sql = "SELECT * FROM User WHERE email = :email";
+
+            $statement = $this->connection->prepare($sql);
+            $statement->execute(['email' => $email]);
+
+            return $statement->fetch();
+        }
     
         public function update() {
             $sql = "UPDATE User SET password = :password, role = :role, 
@@ -98,7 +108,8 @@ class UserModel extends BaseModel {
             $statement = $this->connection->prepare($sql);
             $statement->execute($change_user_state);
         }
-    
+
+
         public function get_id() {
             return $this->id;
         }

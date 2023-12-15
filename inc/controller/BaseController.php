@@ -21,6 +21,7 @@ class BaseController implements Controller {
     public function findOne($id) {}
     public function delete($id) {}
     public function update($id) {}
+    public function findByEmail($email) {}
 
     public function error($message) {
         echo "<script>alert(\"$message\")</script>";

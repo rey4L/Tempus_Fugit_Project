@@ -14,16 +14,20 @@
                     <div class="card mt-5">
                         <div class="card-body">
                             <h3 class="card-title text-center">Login</h3>
-                            <form>
-                                <div class="form-group">
+                            <form action="<?= BASE_URL . "/user/login"?>" method="post">                                
+                            <div class="form-group">
                                     <label for="email">Email address</label>
-                                    <input type="email" class="form-control" id="email" placeholder="Enter email">
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input type="password" class="form-control" id="password" placeholder="Password">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Login</button>
+                            </form>
+
+                            <form method="post">
+                            <a class="reg-button" href="<?= BASE_URL."/user/registerPage"?>">Register a New User</a> 
                             </form>
                         </div>
                     </div>
