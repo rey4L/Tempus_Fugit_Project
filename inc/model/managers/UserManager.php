@@ -6,8 +6,8 @@ class UserManager {
 
     protected function generateSaltedPassword($password) {
         //Generate a random 16 bit hexadecimal string
-        //$salt = bin2hex(random_bytes(16));
-        $salt = "a1b2c3d4e5f6g7h8";
+        $salt = bin2hex(random_bytes(8));
+        
         //Prepend the string to the password
         $salted_password = $salt.$password;
         return $salted_password;
@@ -23,11 +23,10 @@ class UserManager {
         $this->userModel->set_role("cashier");
         $this->userModel->set_employee_id($employee_id);
 
-        $salted_password = $this->generateSaltedPassword($this->userModel->get_password());
+        // $salted_password = $this->generateSaltedPassword($this->userModel->get_password());
 
         $this->userModel->set_password(
-            password_hash($salted_password, PASSWORD_DEFAULT)
-            //$salted_password
+            password_hash($password, PASSWORD_DEFAULT)
         );
 
         $this->userModel->create();
@@ -39,11 +38,10 @@ class UserManager {
         $this->userModel->set_role("manager");
         $this->userModel->set_employee_id($employee_id);
 
-        $salted_password = $this->generateSaltedPassword($this->userModel->get_password());
+        // $salted_password = $this->generateSaltedPassword($this->userModel->get_password());
 
         $this->userModel->set_password(
-            password_hash($salted_password, PASSWORD_DEFAULT)
-            //$salted_password
+            password_hash($password, PASSWORD_DEFAULT)
         );
 
         $this->userModel->create();
@@ -51,14 +49,12 @@ class UserManager {
 
     public function validateUser($email, $password){
         $user = $this->userModel->findByEmail($email);
+        
 
-        $password = $this->generateSaltedPassword($password);
-    
         if (isset($user) && password_verify($password, $user['password'])) {
             return $user;
-        } else return false;
-
+        } 
+        
+        return false;
     }
-    
-
 }

@@ -19,18 +19,19 @@ class UserController extends BaseController {
         $email = $_POST['email']; 
         $password = $_POST['password'];
 
+        // $output = $this->model->getHashedPasswordbyEmail($email);
+        // var_dump($output);
+        
+
         $isValidUser = $this->manager->validateUser($email, $password);
 
-        if (isset($isValidUser)) {
+        if ($isValidUser) {
             $_SESSION['user_id'] = $isValidUser['id'];
             $_SESSION['user_role'] = $isValidUser['role'];
             $this->anchor("register");
-        } 
-        else {
+        } else {
             echo "retry credentials";
-
-        }
-        
+        }  
     }
 
     public function logout() {
