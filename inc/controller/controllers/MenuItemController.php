@@ -18,7 +18,6 @@ class MenuItemController extends BaseController {
     public function create() {
         
         list(
-            
             $name,
             $price,
             $description,

@@ -3,9 +3,11 @@
 class EmployeeController extends BaseController {
 
     private $model;
+    private $validator;
 
     public function __construct() {
         $this->model = new EmployeeModel();
+        $this->validator = new EmployeeValidator();
     }
 
     public function index() {
@@ -17,17 +19,43 @@ class EmployeeController extends BaseController {
         $this->view("employee/EmployeesTab", $data = $employees);
     }
 
-    public function create() {
+    public function create() { 
+
+        list(
+            $firstName,
+            $lastName,
+            $otherNames,
+            $gender,
+            $age,
+            $dob,
+            $jobRole,
+            $email,
+            $contactNumber
+        ) = $this->validator->sanitize(
+            $_POST['first-name'],
+            $_POST['last-name'],
+            $_POST['other-names'],
+            $_POST['gender'],
+            $_POST['age'],
+            $_POST['dob'],
+            $_POST['job-role'],
+            $_POST['email'],
+            $_POST['contact-number']
+        );
+
+        $validatedFirstName = $this->validator->validateName($firstName);
+        $validatedLastName = $this->validator->validateName($lastName);
+        $validatedOtherNames = $this->validator->validateName($otherNames);
+        $validatedGender = $this->validator->validateGender($gender);
+        $validatedAge = $this->validator->validateAge($age);
+        $validatedDob = $this->validator->validateDob($dob);
+        $validatedJobRole = $this->validator->validateJobRole($jobRole);
+        $validatedEmail = $this->validator->validateEmail($email);
+        $validatedContactNumber = $this->validator->validateNumber($contactNumber);
  
-        $firstName = $_POST['first-name'];
-        $lastName = $_POST['last-name'];
-        $otherNames = $_POST['other-names'];
-        $gender = $_POST['gender'];
-        $age = $_POST['age'];
-        $dob = $_POST['dob'];
-        $jobRole = $_POST['job-role'];
-        $email = $_POST['email'];
-        $contactNumber = $_POST['contact-number'];
+        if (!$validatedFirstName || !$validatedGender || !$validatedAge || !$validatedDob || !$validatedJobRole || !$validatedEmail || !$validatedContactNumber) {
+            echo "error";
+        } else {
 
         $this->model->set_first_name($firstName);
         $this->model->set_last_name($lastName);
@@ -42,6 +70,7 @@ class EmployeeController extends BaseController {
 
         $this->model->create();
         $this->anchor("employee");
+        }
     }
 
     public function findOne($id) {
