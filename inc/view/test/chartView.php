@@ -1,47 +1,58 @@
 <?php
-  $data = "14,19,3,5,2,3,10";
-  $labels = "Red,Blue,Yellow,Green,Purple,Orange,Pink"
+    $data = "14,19,3,5,2,3,10";
+    $labels = "Ice Cream,Pizza,Buns,Burger,Onion,Pepper,Salad";
+    include __DIR__."/../NavbarView.php";
 ?>
 
-<input type="hidden" name="data" id="data" value="<?=$data?>">
-<input type="hidden" name="labels" id="labels" value="<?=$labels?>">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="<?=CSS_URL."graph-view.css"?>">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Sales Chart</title>
+</head>
 
-<div style="width: 500px;">
-  <canvas id="myChart"></canvas>
-</div>
+<body>
+    <input type="hidden" name="data" id="data" value="<?=$data?>">
+    <input type="hidden" name="labels" id="labels" value="<?=$labels?>">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="graph-div">
+        <canvas id="myChart"></canvas>
+    </div>
 
-<form action="">
-  <button>Back button</button>
-</form>
+    <form class="back-to-register-form" action="">
+        <button class="graph-back-button">Back to Register</button>
+    </form>
 
-<script>
-  const ctx = document.getElementById('myChart');
-  
-  let rawData = document.getElementById('data').value;
-  let data = rawData.split(",");
+    <script>
+        const ctx = document.getElementById('myChart');
+        
+        let rawData = document.getElementById('data').value;
+        let data = rawData.split(",");
 
-  let rawLabels = document.getElementById('labels').value;
-  let labels = rawLabels.split(",");
+        let rawLabels = document.getElementById('labels').value;
+        let labels = rawLabels.split(",");
 
-
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: '# of Votes',
-        data: data,
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</script>
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '# of Sales',
+                    data: data,
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
