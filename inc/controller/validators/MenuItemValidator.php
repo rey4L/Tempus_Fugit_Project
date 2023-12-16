@@ -1,7 +1,6 @@
 <?php 
 
 class MenuItemValidator extends Validator {
-    use FilterValidator;
 
     
     public function validateName($name) {

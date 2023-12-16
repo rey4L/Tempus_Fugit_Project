@@ -1,9 +1,7 @@
 .navigation-bar {
-    background-color: #004DA7;
+    background-color: #045dc2;
     overflow: hidden;
     display: flex;
-    justify-content: flex-end; 
-    height: 5.5vw;
 }
 
 .navigation-bar .nav-button {
@@ -23,13 +21,32 @@
     background-color: white;
 }
 
-.logo {
-    position: absolute;
-    left: 0vw;
+.profile-info-container {
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    margin-left: 1%;
 }
 
-.logo img {
-    width: 75%;
-    margin-left: 1vw; 
-    margin-top: 3.2vh;
+.profile-picture {
+    width: 8vh;
+    height: 8vh;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-username {
+    color: #f0f0f0;
+    margin-bottom: 4px;
+}
+
+.profile-info-container a {
+    color: #f0f0f0;
+    text-decoration: underline;
 }

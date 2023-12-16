@@ -6,7 +6,6 @@ require __DIR__."/BaseController.php";
 
 // Include traits
 require __DIR__."/controllers/common/SearchAndFilter.php";
-require __DIR__."/validators/common/SearchAndFilterValidator.php";
 
 // Include specific controllers
 require __DIR__."/controllers/ErrorController.php";

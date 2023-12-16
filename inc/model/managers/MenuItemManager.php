@@ -77,6 +77,8 @@ class MenuItemManager {
                 if (!in_array($billItem['name'], $items['labels'])) {
                     array_push($items['labels'], $billItem['name']);
                     array_push($items['data'], $billItem['amount']);
+
+
                 } else {
                     $index = array_search($billItem['name'], $items['labels']);
                     $items['data'][$index] += $billItem['amount'];
@@ -85,6 +87,53 @@ class MenuItemManager {
         }
 
         return $items;
+    }
+
+    public function getItemsSoldWithinPeriod2($startDate, $endDate) {
+        $bills = $this->billModel->findAllWithinPeriod($startDate, $endDate);
+
+  
+        $bills = $this->billModel->findAllWithinPeriod($startDate, $endDate); 
+        $items = [
+            "title" => [],
+            "data" => []
+        ];
+        foreach($bills as $bill) {
+            $this->billItemModel->set_bill_id($bill['id']);
+            foreach($this->billItemModel->findAllForBill() as $billItem) {
+                if (!in_array($billItem['name'], $items['title'])) {
+                    array_push($items['title'], $billItem['name']);
+                    $data = [];
+                    $start = new DateTime($startDate);
+                    $end = new DateTime($endDate);
+            
+                    while ($start <= $end) {
+                        if($bill['order_date'] == $start->format('Y-m-d')) {
+                            array_push($data, $billItem['amount']);
+                        } else {
+                            array_push($data, 0);
+                        }
+                        $start->modify('+1 day');
+                    }
+                    array_push($items['data'], $data);
+                } else {
+                    $index = array_search($billItem['name'], $items['title']);
+                    $start = new DateTime($startDate);
+                    $end = new DateTime($endDate);
+                    $x = 0;
+                    while ($start <= $end) {
+                        if($bill['order_date'] == $start->format('Y-m-d')) {
+                            $items['data'][$index][$x] += $billItem['amount'];
+                        }
+                        $x++;
+                        $start->modify('+1 day');
+                    }
+                }
+            }
+        }
+
+        return $items;
+
     }
 
 }

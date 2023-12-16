@@ -1,8 +1,7 @@
 <?php
 
 class EmployeeValidator extends Validator {
-    use FilterValidator;
-
+    
     public function validateOtherNames($otherNames) {
         if (empty($otherNames)) return true;
         if (!$this->isString($otherNames)) false;

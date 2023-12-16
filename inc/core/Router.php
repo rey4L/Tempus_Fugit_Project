@@ -1,9 +1,5 @@
 <?php
 
-session_start();
-$_SESSION['user_id'] = 0;
-$_SESSION['user_role'] = 'manager';
-
 class Router {
 
     private $controller = null;
@@ -32,42 +28,39 @@ class Router {
         $path = $_SERVER["REQUEST_URI"];
         $url = $this->getUrl($path);
 
-        if ($this->isUserLoggedIn()) {
-            if (count($url) === 0) { 
-                $this->setDefault("user");
-            } else {
-                $controllerName = $this->getControllerName($url[0]);
+        if (count($url) === 0) { 
+            $this->setDefault("user");
+        } else {
+            $controllerName = $this->getControllerName($url[0]);
 
-                if ($this->controllerExists($controllerName)) {
-                    $this->getController($controllerName);
-                    if (count($url) === 1) 
-                        $this->method = "index";
+            if ($this->controllerExists($controllerName)) {
+                $this->getController($controllerName);
+                if (count($url) === 1) 
+                    $this->method = "index";
+                else 
+                    if (method_exists($this->controller, $url[1])) 
+                        $this->method = $url[1];
                     else 
-                        if (method_exists($this->controller, $url[1])) 
-                            $this->method = $url[1];
-                        else 
-                            $this->method = "";
-                } else $this->reset();
-            } 
+                        $this->method = "";
+            } else $this->reset();
+        } 
 
-            if ($this->controller !== null && $this->method !== "") {
-                if (!empty($url[2])) 
-                    $this->params = [$url[2]];
-                
-                if (METHOD === POST && !in_array($this->method, $this->validPostPaths)) 
-                    $this->loadError("401");
+        if ($this->isUserLoggedIn()) {
+            $this->errorChecks($url);
+            $this->callController();
+            $this->reset();
+        } else {
+            $this->errorChecks($url);
+            if(get_class($this->controller) == "UserController") {
+                $this->callController(); 
+                $this->reset();
+            } else {
+                $this->setDefault("user");
+                $this->callController();
+            }
 
-                if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) 
-                    $this->loadError("401");
-            
-                if(!$this->checkUserPermissions(get_class($this->controller))) 
-                    $this->loadError("401");
-                
-            } else $this->loadError("404");
-        } else $this->setDefault("user");
-        
-        $this->callController();
-        $this->reset();
+        }
+      
     }
 
     private function getUrl($url) {
@@ -95,12 +88,34 @@ class Router {
 
     private function checkUserPermissions($controllerName) {
         
-        if($_SESSION['user_role'] == 'cashier') 
-            return in_array($controllerName, $this->validCashierControllers);
+        if (isset($_SESSION['user_role']) && isset($_SESSION['user_role'])) {
+            if($_SESSION['user_role'] == 'cashier') 
+                return in_array($controllerName, $this->validCashierControllers);
         
-        if($_SESSION['user_role'] == 'manager') 
-            return in_array($controllerName, $this->validManagerControllers);
+            if($_SESSION['user_role'] == 'manager') 
+                return in_array($controllerName, $this->validManagerControllers);
+        } else {
+            return true;
+        }
         
+    }
+
+    private function errorChecks($url) {
+        if ($this->controller !== null && $this->method !== "") {
+            if (!empty($url[2])) {
+                $this->params = [$url[2]];
+            }
+            
+            if (METHOD === POST && !in_array($this->method, $this->validPostPaths)) 
+                $this->loadError("401");
+
+            if (METHOD === GET && !in_array($this->method, $this->validGetPaths)) 
+                $this->loadError("401");
+        
+            if(!$this->checkUserPermissions(get_class($this->controller))) 
+                $this->loadError("401");
+            
+        } else $this->loadError("404");
     }
 
     private function loadError($errorCode) {
