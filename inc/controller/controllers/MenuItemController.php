@@ -39,6 +39,18 @@ class MenuItemController extends BaseController {
             $_POST['ingredients']
         );
 
+        if (!$this->validateInputs(
+            $name, 
+            $price, 
+            $description, 
+            $image, 
+            $discount, 
+            $tags, 
+            $ingredients
+        )) {
+            return;
+        }
+
         $this->model->set_name($name);
         $this->model->set_price($price);
         $this->model->set_description($description);
@@ -157,6 +169,52 @@ class MenuItemController extends BaseController {
 
         $this->view("menu/PeriodItemsChart", $data);
     }
+
+    private function validateInputs($name, $price, $description, $image, $discount, $tags, $ingredients) {
+        switch (false) {
+            case $this->validator->validateName($name):
+                $this->error("name is not of type string");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isInt($price):
+                $this->error("Price is not of type number");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isString($description):
+                $this->error("description is not of type string");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isString($image):
+                $this->error("image is not of type string");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isFloat($discount):
+                $this->error("discount is not of type float");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isString($tags):
+                $this->error("imagtagse are not of type string");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isString($ingredients):
+                $this->error("ingredients is not of type string");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+
+            default:
+                return true;
+                break;
+        }
+        return TRUE;
+    }
+
 
   
 }

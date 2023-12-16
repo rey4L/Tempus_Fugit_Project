@@ -79,7 +79,6 @@ class RegisterController extends BaseController {
         $this->anchor("register");
     }
 
-    // updates empty bill and submits
     public function update($id = 0) {
         $id = $this->manager->retrieveLastBillId();
         

@@ -88,7 +88,7 @@ class EmployeeController extends BaseController {
                 $this->view("employee/EmployeeAdd");
                 return false;
                 break;
-            case $this->validator->validateOtherNames($otherNames):
+            case $this ->validator->validateOtherNames($otherNames):
                 $this->error("Other names is not valid. Please input in correct string format!");
                 $this->view("employee/EmployeeAdd");
                 return false;
