@@ -35,9 +35,10 @@ class UserManager {
     }
 
     public function validateUser($email, $password){
+        $this->userModel->set_email($email);
+        
         $user = $this->userModel->findByEmail($email);
         
-
         if (isset($user) && password_verify($password, $user['password'])) {
             return $user;
         } 

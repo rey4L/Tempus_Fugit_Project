@@ -10,17 +10,20 @@ class UserController extends BaseController {
     }
 
     public function index() {
-        $this->view("user/Register");
+        $this->view("user/Login");
     }
 
     public function login() {
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
         $email = $_POST['email']; 
         $password = $_POST['password'];
 
         $isValidUser = $this->manager->validateUser($email, $password);
-
+        var_dump($isValidUser);
+        
         if ($isValidUser) {
             $_SESSION['user_id'] = $isValidUser['id'];
             $_SESSION['user_role'] = $isValidUser['role'];
@@ -31,6 +34,9 @@ class UserController extends BaseController {
     }
 
     public function logout() {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         unset($_SESSION['user_id']);
         unset($_SESSION['user_role']);
     }

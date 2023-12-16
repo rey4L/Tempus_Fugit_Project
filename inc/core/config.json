@@ -4,7 +4,11 @@
         "showMostProfitableItems",
         "showMostSoldItems",
         "showMostSoldWithinPeriod",
-        "showMostSoldWithinPeriod2"   
+        "showMostSoldWithinPeriod2",
+        "logout",
+        "login",
+        "register",
+        "registerPage"
     ],
     "POST" : [
         "findAll",
@@ -23,7 +27,8 @@
         "searchByName",
         "login",
         "logout",
-        "register"
+        "register",
+        "registerPage"
     ],
     "CASHIER" : [
         "UserController",
