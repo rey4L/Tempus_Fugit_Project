@@ -209,7 +209,7 @@ class MenuItemController extends BaseController {
     private function validateInputs($name, $price, $description, $image, $discount, $tags, $ingredients) {
         switch (false) {
             case $this->validator->validateName($name):
-                $this->error("name is not of type string");
+                $this->error("Name should not be empty!");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
@@ -219,31 +219,30 @@ class MenuItemController extends BaseController {
                 return false;
                 break;
             case $this->validator->isString($description):
-                $this->error("description is not of type string");
+                $this->error("Description should not be empty!");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isString($image):
-                $this->error("image is not of type string");
+                $this->error("Image should not be empty!");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isFloat($discount):
-                $this->error("discount is not of type float");
+                $this->error("Discount should be of type float!");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
-            case $this->validator->isString($tags):
-                $this->error("imagtagse are not of type string");
+            case $this->validator->validateTags($tags):
+                $this->error("Tags should be in valid format and should not be empty!");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
-            case $this->validator->isString($ingredients):
-                $this->error("ingredients is not of type string");
+            case $this->validator->validateTags($ingredients):
+                $this->error("Ingredients should be in valid format and should not be empty");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
-
             default:
                 return true;
                 break;

@@ -14,6 +14,13 @@ class Validator {
         return count($sanitized) === 1 ? $sanitized[0] : $sanitized;
     }
 
+    public function validateTags($otherNames) {
+        if (empty($otherNames)) return true;
+        if (!$this->isString($otherNames)) false;
+        $pattern = '/^(\w+,)*\w+$/';
+        return preg_match($pattern, $otherNames) === 1;
+    }
+
     public function isString($input){
         return !empty($input) && is_string($input);
     }

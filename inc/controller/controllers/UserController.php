@@ -34,16 +34,15 @@ class UserController extends BaseController {
             $password
         )) return;
 
-
         $isValidUser = $this->manager->validateUser($email, $password);
-        var_dump($isValidUser);
-        
+  
         if ($isValidUser) {
             $_SESSION['user_id'] = $isValidUser['id'];
             $_SESSION['user_role'] = $isValidUser['role'];
             $this->anchor("register");
         } else {
-            echo "retry credentials";
+            $this->error("Invalid Credentials. Please try again");
+            $this->view("user/Login");
         }  
     }
 
@@ -59,11 +58,7 @@ class UserController extends BaseController {
     }
 
     public function register() {
-        $email = $_POST['email']; 
-        $password = $_POST['password'];
-        $role = $_POST['role'];
-        $employee_id = $_POST['employee_id'];
-        
+
         list(
             $email,
             $password,
@@ -127,15 +122,14 @@ class UserController extends BaseController {
 
     private function validateLoginInputs($email, $password) {
         switch (false) {
-            
             case $this->validator->isEmail($email):
-                $this->error("Email invalid Type");
+                $this->error("Email is not valid!");
                 $this->view("user/Register");
                 return false;
                 break;
 
             case $this->validator->validatePassword($password):
-                echo "password is required to be greater than 5 letters";
+                $this->error("Password must be of mininum 8 characters. Contain atleat 1 uppercase, 1 lowercase, 1 special character and 1 number!");
                 $this->view("user/Register");
                 return false;
                 break;
