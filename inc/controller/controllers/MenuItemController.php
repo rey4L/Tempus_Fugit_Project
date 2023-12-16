@@ -131,7 +131,43 @@ class MenuItemController extends BaseController {
         $this->view("menu/MostProfitableItemsChart", $data);
     }
 
+    public function showMostSoldWithinPeriod2() {
+        $items = $this->manager->getItemsSoldWithinPeriod2(
+            '2023-11-01',
+            '2023-12-24'
+        );
+
+        $labels = "";
+        $values = "";
+
+        foreach($items['title'] as $item) {
+            if(!empty($labels)) {
+                $labels = $labels.",".$item;
+            } else {
+                $labels = $item;
+            }
+        }
+
+        foreach($items['data'] as $data) {
+            if(!empty($values)) {
+                $values = $values.",".implode("-", $data);
+            } else {
+                $values = implode("-", $data);
+            }
+        }
+
+        $data = [
+            "labels" => $labels,
+            "data" => $values,
+            "start"=>'2023-11-01',
+            "end"=>'2023-12-24',
+        ];
+
+        $this->view("menu/PeriodItemsChart2", $data);
+    }
     public function showMostSoldWithinPeriod() {
+        
+
         $items = $this->manager->getItemsSoldWithinPeriod(
             '2023-11-16',
             '2023-11-24'

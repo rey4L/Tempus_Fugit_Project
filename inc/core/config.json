@@ -3,7 +3,8 @@
         "index",
         "showMostProfitableItems",
         "showMostSoldItems",
-        "showMostSoldWithinPeriod"   
+        "showMostSoldWithinPeriod",
+        "showMostSoldWithinPeriod2"   
     ],
     "POST" : [
         "findAll",
