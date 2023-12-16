@@ -180,13 +180,6 @@
                 <button class="cash-register-button button-1" type="submit" form="manage-bills-form">Manage Bills</button>
             </div>
         </form>
-
-        <form action="<?=BASE_URL."/Test"?>" method="POST" id="sales-graph-form">
-            <div class="container">
-                <button class="cash-register-button button-1" type="submit" form="sales-graph-form">Sales Graph</button>
-            </div>
-        </form>
-
                     
         <script>
             let confirmButtonItems = document.getElementById("confirm-button-number-of-items");

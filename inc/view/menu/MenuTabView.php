@@ -32,6 +32,20 @@
     </div>
     <!-- SEARCH BAR -->
 
+    <!-- GRAPH BUTTONS -->
+
+    <div class="graph-div">
+        <p class="graph-text">Graphs:</p>
+
+        <div class="button-container">
+            <button class="graph-button">Most Sold</button>
+            <button class="graph-button">Most Profitable</button>
+            <button class="graph-button">Items Sold</button>
+        </div>
+    </div>
+
+    <!-- GRAPH BUTTONS -->
+
     <!-- SELECT * QUERY -->
     <?php if(!empty($data[0])) : ?>
     <?php foreach ($data as $item): ?>
