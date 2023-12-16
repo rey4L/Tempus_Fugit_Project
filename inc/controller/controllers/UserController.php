@@ -10,18 +10,14 @@ class UserController extends BaseController {
     }
 
     public function index() {
-        $this->view("user/Login");
+        $this->view("user/Register");
     }
 
     public function login() {
         session_start();
-        // queries model for user
+
         $email = $_POST['email']; 
         $password = $_POST['password'];
-
-        // $output = $this->model->getHashedPasswordbyEmail($email);
-        // var_dump($output);
-        
 
         $isValidUser = $this->manager->validateUser($email, $password);
 
@@ -35,14 +31,12 @@ class UserController extends BaseController {
     }
 
     public function logout() {
-        // destroys session
-
-        // redirect to login page
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_role']);
     }
 
     public function registerPage() {
         $this->view("user/Register");
-        // calls the view function to render the register page 
     }
 
     public function register() {
@@ -51,16 +45,12 @@ class UserController extends BaseController {
         $role = $_POST['role'];
         $employee_id = $_POST['employee_id'];
 
-
         if ($role == 'cashier') {
             $this->manager->createStandardUser($email, $password,$employee_id);
-        }else if ($role == 'manager'){
+        } else if ($role == 'manager'){
             $this->manager->createAdminUser($email, $password, $employee_id);
         }
 
         $this->anchor("user");
-
-        // calls the designated user manager function to create the necessary role
-        // $this->manager->createCashierUser() or $this->manager->createManagerUser()
     }
 }
