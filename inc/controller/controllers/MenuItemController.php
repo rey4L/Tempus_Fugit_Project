@@ -2,7 +2,7 @@
 
 class MenuItemController extends BaseController {
     use SearchAndFilter;
-    
+
     private $model;
     private $manager;
     private $validator;
@@ -98,6 +98,7 @@ class MenuItemController extends BaseController {
         $items = $this->manager->getMostProfitableItems();
         $labels = "";
         $values = "";
+
         foreach($items as $item) {
             $labels = $labels.",".$item['name'];
             $values = $values.",".$item['items_sold'];
@@ -116,6 +117,7 @@ class MenuItemController extends BaseController {
         $items = $this->manager->getMostProfitableItems();
         $labels = "";
         $values = "";
+
         foreach($items as $item) {
             $labels = $labels.",".$item['name'];
             $values = $values.",".$item['profit_generated'];
@@ -127,6 +129,33 @@ class MenuItemController extends BaseController {
         ];
 
         $this->view("menu/MostProfitableItemsChart", $data);
+    }
+
+    public function showMostSoldWithinPeriod() {
+        $items = $this->manager->getItemsSoldWithinPeriod(
+            '2023-11-16',
+            '2023-11-24'
+        );
+
+        $labels = "";
+        $values = "";
+
+        foreach ($items['labels'] as $label) {
+            $labels = $labels.",".$label;
+        }
+
+        foreach ($items['data'] as $data) {
+            $values = $values.",".$data;
+        }
+
+        $data = [
+            "start"=>'2023-11-16',
+            "end"=>'2023-11-24',
+            "labels" => $labels,
+            "data" => $values,
+        ];
+
+        $this->view("menu/PeriodItemsChart", $data);
     }
 
   

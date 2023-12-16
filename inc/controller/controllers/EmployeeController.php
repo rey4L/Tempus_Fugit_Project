@@ -76,7 +76,6 @@ class EmployeeController extends BaseController {
         $this->view("employee/Employee", $data);
     }
 
-  
     private function validateInputs($firstName, $lastName, $otherNames, $gender, $age, $dob, $jobRole, $email, $contactNumber) {
         switch (false) {
             case $this->validator->isString($firstName):

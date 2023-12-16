@@ -4,11 +4,13 @@ trait SearchAndFilter {
  
     public function searchById($viewPath) {
         $searchQuery = $this->validator->sanitize($_POST['search-query']);
+        
         if (!$this->validator->isInt($searchQuery)) {
             $this->error("Query should be a Integer!");
             $this->index();
             return;
         }
+        
         $this->model->set_id($searchQuery);
         $data = $this->model->findById();
         $this->view($viewPath, $data = [$data]);

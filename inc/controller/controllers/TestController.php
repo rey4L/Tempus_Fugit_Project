@@ -2,7 +2,7 @@
 
 class TestController extends BaseController {
     public function index() {
-        $this->view("test/chart");
+        $this->view("menu/PeriodItemsChart");
     }
 
     // calculating profitable items

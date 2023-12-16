@@ -31,7 +31,6 @@
         let data = rawData.split(",");
 
         let rawLabels = document.getElementById('labels').value;
-        console.log(rawLabels);
         let labels = rawLabels.split(",");
 
         new Chart(ctx, {

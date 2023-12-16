@@ -1,14 +1,18 @@
 <?php
 
 class MenuItemManager {
-    private $model;
+    private $menuItemModel;
+    private $billModel;
+    private $billItemModel;
 
     public function __construct() {
-        $this->model = new MenuItemModel();
+        $this->menuItemModel = new MenuItemModel();
+        $this->billModel = new BillModel();
+        $this->billItemModel = new BillItemModel();
     }
 
     public function getMostSoldItems() {
-        $items =  $this->model->findAllByItemsSold();
+        $items =  $this->menuItemModel->findAllByItemsSold();
         $mostSoldItems = array_slice(
            $items,
             0,
@@ -35,7 +39,7 @@ class MenuItemManager {
     }
 
     public function getMostProfitableItems() {
-        $items =  $this->model->findAllByMostProfitGenerated();
+        $items =  $this->menuItemModel->findAllByMostProfitGenerated();
         $mostProfitableItems = array_slice(
            $items,
             0,
@@ -62,7 +66,25 @@ class MenuItemManager {
     }
 
     public function getItemsSoldWithinPeriod($startDate, $endDate) {
-        return "You suck";
+        $bills = $this->billModel->findAllWithinPeriod($startDate, $endDate); 
+        $items = [
+            "labels" => [],
+            "data" => []
+        ];
+        foreach($bills as $bill) {
+            $this->billItemModel->set_bill_id($bill['id']);
+            foreach($this->billItemModel->findAllForBill() as $billItem) {
+                if (!in_array($billItem['name'], $items['labels'])) {
+                    array_push($items['labels'], $billItem['name']);
+                    array_push($items['data'], $billItem['amount']);
+                } else {
+                    $index = array_search($billItem['name'], $items['labels']);
+                    $items['data'][$index] += $billItem['amount'];
+                }
+            }
+        }
+
+        return $items;
     }
 
 }

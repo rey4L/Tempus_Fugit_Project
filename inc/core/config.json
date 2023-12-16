@@ -2,7 +2,8 @@
     "GET" : [
         "index",
         "showMostProfitableItems",
-        "showMostSoldItems"    
+        "showMostSoldItems",
+        "showMostSoldWithinPeriod"   
     ],
     "POST" : [
         "findAll",
