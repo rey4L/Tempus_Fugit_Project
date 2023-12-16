@@ -24,12 +24,7 @@ class UserController extends BaseController {
         $email = $_POST['email']; 
         $password = $_POST['password'];
 
-        // $output = $this->model->getHashedPasswordbyEmail($email);
-        // var_dump($output);
-        
-
         $isValidUser = $this->manager->validateUser($email, $password);
-        var_dump($isValidUser);
         
         if ($isValidUser) {
             $_SESSION['user_id'] = $isValidUser['id'];
@@ -41,10 +36,14 @@ class UserController extends BaseController {
     }
 
     public function logout() {
-        // destroys session
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 
-        // redirect to login page
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_role']);
     }
+
 
     public function registerPage() {
         $this->view("user/Register");
@@ -56,7 +55,6 @@ class UserController extends BaseController {
         $role = $_POST['role'];
         $employee_id = $_POST['employee_id'];
 
-
         if ($role == 'cashier') {
             $this->manager->createStandardUser($email, $password,$employee_id);
         } else if ($role == 'manager'){
@@ -65,7 +63,5 @@ class UserController extends BaseController {
 
         $this->anchor("user");
 
-        // calls the designated user manager function to create the necessary role
-        // $this->manager->createCashierUser() or $this->manager->createManagerUser()
     }
 }
