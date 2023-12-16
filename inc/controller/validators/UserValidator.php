@@ -37,7 +37,8 @@ class UserValidator extends Validator
     }
 
     public function validateEmployeeId($employee_id) {
-        return is_int($employee_id) ? true : false;
+        $employee_id = intval($employee_id);
+        return is_int($employee_id);
     }
 
 }

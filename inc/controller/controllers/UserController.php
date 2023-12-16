@@ -101,19 +101,19 @@ class UserController extends BaseController {
                 break;
 
             case $this->validator->validatePassword($password):
-                echo "password is required to be greater than 5 letters";
+                $this->error("password is required to be greater than 5 letters");
                 $this->view("user/Register");
                 return false;
                 break;
 
             case $this->validator->validateRole($role):
-                echo "role is invalid";
+                $this->error("role is invalid");
                 $this->view("user/Register");
                 return false;
                 break;
 
             case $this->validator->validateEmployeeId($employee_id):
-                echo "employee_id is required to be a Number";
+                $this->error("employee_id is required to be a Number");
                 $this->view("user/Register");
                 return false;
                 break;
