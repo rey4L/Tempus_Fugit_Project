@@ -47,6 +47,15 @@ class MenuItemModel extends BaseModel {
         return $statement->fetchAll(); 
     }
 
+    public function findAllByName() {
+        $sql = "SELECT * FROM MenuItem WHERE name = :name";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute(['name' => $this->name]);
+
+        return $statement->fetchAll();
+    }
+
     public function findById() {
         $sql = "SELECT * FROM MenuItem WHERE id = :id";
 

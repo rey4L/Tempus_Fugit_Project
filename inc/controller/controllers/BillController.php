@@ -1,13 +1,16 @@
 <?php
 
 class BillController extends BaseController {
+    use SearchAndFilter;
 
     private $model;
     private $manager;
+    private $validator;
 
     public function __construct() {
         $this->model = new BillModel();
         $this->manager = new BillManager();
+        $this->validator = new Validator();
     }
 
     public function index() {
@@ -42,40 +45,5 @@ class BillController extends BaseController {
         $this->anchor("bill");
     }
 
-    public function searchById() {
-        $this->model->set_id($_POST['search-query']);
-        $data = $this->model->findById();
-        $this->view("BillsTab", $data = [$data]);
-    }
 
-    public function filterByDate() {
-        $date = date('Y-m-d');
-
-        switch ($_POST['date']) {
-            case 'last-week':
-                $date = date('Y-m-d', strtotime('-1 week', strtotime($date)));
-                break;
-
-            case 'last-month':
-                $date = date('Y-m-d', strtotime('-4 weeks', strtotime($date))); 
-                break;
-
-            case 'last-six-months':
-                $date = date('Y-m-d', strtotime('-24 weeks', strtotime($date)));
-                break;
-
-            default:
-                break;
-        }
-
-        $this->model->set_order_date($date);
-        $data = $this->model->findAllWhereDateGreaterThan();
-        $this->view("bill/BillsTab", $data);
-    }
-
-    public function filterByStatus() {
-        $this->model->set_status($_POST['status']);
-        $data = $this->model->findAllByStatus();
-        $this->view("bill/BillsTab", $data = $data);
-    }
 }

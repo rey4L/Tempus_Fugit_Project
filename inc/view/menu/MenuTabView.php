@@ -17,8 +17,8 @@
 <body>
     <!-- SEARCH BAR -->
     <div class="search-bar-container">
-        <form class="search-form" action=<?=BASE_URL."/menuitem/searchById"?> method="POST">
-            <input name="search-query" class="search-bar" type="text" placeholder="Search Item by ID">
+        <form class="search-form" action=<?=BASE_URL."/menuitem/searchByName/menu=MenuTab"?> method="POST">
+            <input name="search-query" class="search-bar" type="text" placeholder="Search Item by Name">
             <button class="search-button"><img title="Search" class="search-icon" src="<?= RESOURCE_URL."search.png"?>" alt="Search Button"></button>
         </form>
 

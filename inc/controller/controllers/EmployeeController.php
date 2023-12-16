@@ -1,6 +1,7 @@
 <?php
 
 class EmployeeController extends BaseController {
+    use SearchAndFilter;
 
     private $model;
     private $validator;
@@ -75,19 +76,7 @@ class EmployeeController extends BaseController {
         $this->view("employee/Employee", $data);
     }
 
-    // filter and search options
-    public function searchById() {
-        $this->model->set_id($_POST['search-query']);
-        $data = $this->model->findById();
-        $this->view("employee/EmployeesTab", $data = [$data]);
-    }
-
-    public function filterByStatus() {
-        $this->model->set_status($_POST['status']);
-        $data = $this->model->findAllByStatus();
-        $this->view("employee/EmployeesTab", $data = $data);
-    }
-
+  
     private function validateInputs($firstName, $lastName, $otherNames, $gender, $age, $dob, $jobRole, $email, $contactNumber) {
         switch (false) {
             case $this->validator->isString($firstName):
@@ -115,7 +104,7 @@ class EmployeeController extends BaseController {
                 $this->view("employee/EmployeeAdd");
                 return false;
                 break;
-            case $this->validator->validateDob($dob):
+            case $this->validator->validateDate($dob):
                 $this->error("Date of Birth is not it valid format: yyyy-mm-dd");
                 $this->view("employee/EmployeeAdd");
                 return false;

@@ -21,11 +21,7 @@ class EmployeeValidator extends Validator {
                 FILTER_VALIDATE_INT, 
                 ['options' => ['min_range' => 18, 'max_range' => 70]]);
     }
-    
-    public function validateDob($dob) {
-        $validDob = date_create_from_format('Y-d-m', $dob);
-        return $validDob !== false;
-    }
+
 
     public function validateDobAndAge($dob, $age) {
         return $this->calculateAge($dob) == $age;

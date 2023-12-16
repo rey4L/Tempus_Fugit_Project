@@ -18,13 +18,13 @@
     <div class="search-bar-container">
         <form 
             class="search-form"
-            action=<?=BASE_URL."/employee/searchById"?> 
+            action=<?=BASE_URL."/employee/searchByLastName/employee=EmployeesTab"?> 
             method="POST">
             <input 
                 class="search-bar" 
                 name="search-query"
                 type="text" 
-                placeholder="Search Employees by ID">
+                placeholder="Search Employees by Last Name">
             
             <button 
                 type="submit"
@@ -41,7 +41,7 @@
             <button class="clear-search" type="submit">Clear Search</button>
         </form>
       
-        <form action=<?=BASE_URL."/employee/filterByStatus"?> method="POST">
+        <form action=<?=BASE_URL."/employee/filterByStatus/employee=EmployeesTab"?> method="POST">
             <select class="search-bar-dropdown-1" name="status" id="status" onchange="this.form.submit()">
                 <option disabled selected>Status</option>
                 <option value="active">Active</option>

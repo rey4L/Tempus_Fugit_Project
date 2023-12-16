@@ -4,6 +4,10 @@
 require __DIR__."/Controller.php";
 require __DIR__."/BaseController.php";
 
+// Include traits
+require __DIR__."/controllers/common/SearchAndFilter.php";
+require __DIR__."/validators/common/SearchAndFilterValidator.php";
+
 // Include specific controllers
 require __DIR__."/controllers/ErrorController.php";
 require __DIR__."/controllers/UserController.php";
@@ -16,8 +20,9 @@ require __DIR__."/controllers/TestController.php";
 // include validators
 require __DIR__."/validators/Errors.php";
 require __DIR__."/validators/Validator.php";
-require __DIR__."/validators/FilterValidator.php";
 require __DIR__."/validators/RegisterValidator.php";
 require __DIR__."/validators/EmployeeValidator.php";
 require __DIR__."/validators/MenuItemValidator.php";
+
+
 

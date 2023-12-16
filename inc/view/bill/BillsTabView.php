@@ -17,7 +17,7 @@
 <body>
     <!-- SEARCH BAR -->
     <div class="search-bar-container">
-        <form class="search-form" action=<?=BASE_URL."/bill/searchById"?> method="POST">
+        <form class="search-form" action=<?=BASE_URL."/bill/searchById/bill=BillsTab"?> method="POST">
             <input class="search-bar" type="text" placeholder="Search Bills by ID" name="search-query">
             <button type="submit" class="search-button"><img title="Search" class="search-icon" src="<?= RESOURCE_URL."search.png"?>" alt="Search Button"></button>
         </form>
@@ -26,7 +26,7 @@
             <button class="clear-search" type="submit">Clear Search</button>
         </form>
       
-        <form action=<?=BASE_URL."/bill/filterByStatus"?> method="POST">
+        <form action=<?=BASE_URL."/bill/filterByStatus/bill=BillsTab"?> method="POST">
             <select class="search-bar-dropdown-1" name="status" id="status" onchange="this.form.submit()">
                 <option disabled selected>Status</option>
                 <option value="completed">Completed</option>

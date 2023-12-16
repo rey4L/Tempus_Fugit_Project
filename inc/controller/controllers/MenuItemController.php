@@ -1,7 +1,8 @@
 <?php
 
 class MenuItemController extends BaseController {
-
+    use SearchAndFilter;
+    
     private $model;
     private $manager;
     private $validator;
@@ -128,11 +129,5 @@ class MenuItemController extends BaseController {
         $this->view("menu/MostProfitableItemsChart", $data);
     }
 
-    // filter and search options 
-
-    public function searchById() {
-        $this->model->set_id($_POST['search-query']);
-        $data = $this->model->findById();
-        $this->view("menu/MenuTab", $data = [$data]);
-    }
+  
 }

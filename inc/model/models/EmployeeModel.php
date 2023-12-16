@@ -58,6 +58,15 @@ class EmployeeModel extends BaseModel {
         return $statement->fetch();
     }
 
+    public function findAllByLastName() {
+        $sql = "SELECT * FROM Employee WHERE last_name = :last_name";
+
+        $statement = $this->connection->prepare($sql);
+        $statement->execute(['last_name' => $this->last_name]);
+
+        return $statement->fetchAll();
+    }
+
     public function update() {
    
         $sql = "UPDATE Employee SET first_name = :first_name, last_name = :last_name, other_names = :other_names, gender = :gender, age = :age, dob = :dob, job_role = :job_role, email = :email, contact_number = :contact_number, image_url = :image_url, status = :status WHERE id = :id";

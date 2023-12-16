@@ -15,7 +15,7 @@ class Validator {
     }
 
     public function isString($input){
-        return is_string($input);
+        return !empty($input) && is_string($input);
     }
 
     public function isInt($input){
@@ -28,6 +28,11 @@ class Validator {
 
     public function isEmail($input){
         return filter_var($input, FILTER_VALIDATE_EMAIL) !== false;
+    }
+
+    public function validateDate($dob) {
+        $validDob = date_create_from_format('Y-d-m', $dob);
+        return $validDob !== false;
     }
 
 

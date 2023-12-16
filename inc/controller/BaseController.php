@@ -3,8 +3,8 @@
 class BaseController implements Controller {
 
     // for rendering views
-    public function view($view_path, $data = []) {
-        $path = implode("/", explode("=", trim($view_path, "=")));
+    public function view($viewPath, $data = []) {
+        $path = implode("/", explode("=", trim($viewPath, "=")));
         include_once __DIR__."/../view/".$path."View.php";
     }
 

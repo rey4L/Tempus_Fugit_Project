@@ -17,6 +17,8 @@
         "filterByStatus",
         "filterByDate",
         "searchById",
+        "searchByLastName",
+        "searchByName",
         "login",
         "logout",
         "register"
