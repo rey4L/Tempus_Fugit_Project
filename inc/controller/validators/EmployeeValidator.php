@@ -1,7 +1,7 @@
 <?php
 
 class EmployeeValidator extends Validator {
-    
+
     public function validateOtherNames($otherNames) {
         if (empty($otherNames)) return true;
         if (!$this->isString($otherNames)) false;
@@ -29,11 +29,6 @@ class EmployeeValidator extends Validator {
     public function validateJobRole($jobRole) {
         $validRoles = ['owner', 'manager', 'cashier', 'cook', 'server', 'clerk'];
         return in_array($jobRole, $validRoles);
-    }
-
-    public function validateEmail($email) {
-        $validEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
-        return $validEmail !== false;
     }
 
     function validatePhoneNumber($number) {

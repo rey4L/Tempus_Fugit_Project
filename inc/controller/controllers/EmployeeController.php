@@ -118,7 +118,7 @@ class EmployeeController extends BaseController {
                 $this->view("employee/EmployeeAdd");
                 return false;
                 break;
-            case $this->validator->validateEmail($email):
+            case $this->validator->isEmail($email):
                 $this->error("Email is not valid!");
                 $this->view("employee/EmployeeAdd");
                 return false;
