@@ -16,7 +16,7 @@ trait SearchAndFilter {
 
     public function searchByName($viewPath) {
         $searchQuery = $this->validator->sanitize($_POST['search-query']);
-        // it will always be a string so... kinda pointless butt...oh well.
+      
         if (!$this->validator->isString($searchQuery)) {
             $this->error("Query should not be empty!");
             $this->index();
@@ -49,7 +49,7 @@ trait SearchAndFilter {
             $this->index();
             return;
         }
-        
+
         $this->model->set_status($status);
         $data = $this->model->findAllByStatus();
         $this->view($viewPath, $data = $data);
