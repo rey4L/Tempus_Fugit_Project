@@ -7,46 +7,59 @@
 class RegisterManager {
     private $menuItemModel;
     private $billModel;
+    private $billItemModel;
 
-    /*
-     * Constructor for RegisterManager.
-     * Initializes instances of MenuItemModel and BillModel.
-     */
     public function __construct() {
         $this->menuItemModel = new MenuItemModel();
         $this->billModel = new BillModel();
+        $this->billItemModel = new BillItemModel();
     }
 
-    /*
-     * Query the discount for a menu item based on its ID.
-     */
     public function queryDiscountForMenuItem($id) {
         $this->menuItemModel->set_id($id);
         $menuItem = $this->menuItemModel->findById();
         return $menuItem['discount'];
     }
 
-    /*
-     * Query the price for a menu item based on its ID.
-     */
     public function queryPriceForMenuItem($id) {
         $this->menuItemModel->set_id($id);
         $menuItem = $this->menuItemModel->findById();
         return $menuItem['price'];
     }
 
-    /*
-     * Get a list of all menu items.
-     */
     public function getMenuItemsList() {
         $menuItem = $this->menuItemModel->findAll();
         return $menuItem;
     }
 
-    /*
-     * Create an empty bill.
-     * Initializes a bill with default values and sets its status to "empty".
-     */
+    public function updateMenuItem($id, $amount) {
+        $this->menuItemModel->set_id($id);
+
+        $menuItem = $this->menuItemModel->findById();
+        $profitGenerated = ($amount * $menuItem['price']) - ($amount * $menuItem['price'] * $menuItem['discount']) - ($amount * $menuItem['cost_to_produce']);
+
+        $this->menuItemModel->set_name($menuItem['name']);
+        $this->menuItemModel->set_price($menuItem['price']);
+        $this->menuItemModel->set_cost_to_produce($menuItem['cost_to_produce']);
+        $this->menuItemModel->set_description($menuItem['description']);
+        $this->menuItemModel->set_image($menuItem['image']);
+        $this->menuItemModel->set_discount($menuItem['discount']);
+        $this->menuItemModel->set_tags($menuItem['tags']);
+        $this->menuItemModel->set_ingredients($menuItem['ingredients']);
+
+        $this->menuItemModel->set_stock_count(
+            $menuItem['stock_count'] - $amount
+        );
+        $this->menuItemModel->set_items_sold(
+            $menuItem['items_sold'] + $amount
+        );
+        $this->menuItemModel->set_profit_generated(
+            $menuItem['profit_generated'] + $profitGenerated
+        );
+
+        $this->menuItemModel->update();
+    }
+
     public function createEmptyBill() {
         $this->billModel->set_customer("");
         $this->billModel->set_number_of_items(0);
@@ -56,17 +69,11 @@ class RegisterManager {
         $this->billModel->create();
     }
 
-    /*
-     * Retrieve the ID of the last empty bill.
-     */
     public function retrieveLastBillId() {
         $this->billModel->set_status("empty");
         return $this->billModel->findByStatus()['id'];
     }
 
-    /*
-     * Submit a bill with the provided information.
-     */
     public function submitBill($bill) {
         $this->billModel->set_id($bill['id']);
         $this->billModel->set_number_of_items($bill['number_of_items']);
@@ -75,4 +82,10 @@ class RegisterManager {
         $this->billModel->set_status("Pending");
         $this->billModel->update();
     }
+
+    public function getItemsForBill($id) {
+        $this->billItemModel->set_bill_id($id);
+        return $this->billItemModel->findAllForBill();
+    }
+
 }

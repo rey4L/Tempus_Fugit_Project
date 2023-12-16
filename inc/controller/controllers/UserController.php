@@ -55,7 +55,7 @@ class UserController extends BaseController {
         if ($role == 'cashier') {
             $this->manager->createStandardUser($email, $password,$employee_id);
         }else if ($role == 'manager'){
-        $this->manager->createAdminUser($email, $password, $employee_id);
+            $this->manager->createAdminUser($email, $password, $employee_id);
         }
 
         $this->anchor("user");

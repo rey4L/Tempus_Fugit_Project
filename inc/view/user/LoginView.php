@@ -25,9 +25,9 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </form>
-
-                            <form method="post">
-                            <a class="reg-button" href="<?= BASE_URL."/user/registerPage"?>">Register a New User</a> 
+                            
+                            <form action="<?= BASE_URL."/user/view/user=register"?>"  method="post">
+                               <button type="submit">Not a User? Sign up here!</button>
                             </form>
                         </div>
                     </div>

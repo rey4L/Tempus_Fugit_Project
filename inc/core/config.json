@@ -23,6 +23,7 @@
     ],
     "CASHIER" : [
         "UserController",
+        "BillController",
         "RegisterController",
         "ErrorController"
     ],
