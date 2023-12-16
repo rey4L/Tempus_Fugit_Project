@@ -47,8 +47,11 @@ class UserController extends BaseController {
     }
 
     public function logout() {
-        $_SESSION = array();
-        session_destroy();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        unset($_SESSION['user_id']);
+        unset($_SESSION['user_role']);
         $this->anchor("user");
 
     }
