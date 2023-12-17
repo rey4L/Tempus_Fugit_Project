@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<?= CSS_URL . "main.css" ?>">
     <link rel="stylesheet" href="<?= CSS_URL . "user-registration.css" ?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha384-qZR7e0apA5KEVWOg5uJMb%2Bv0R5PIu1I0i09D2Ucb6cVsz7eVHM7A4P6F5WTBok5" crossorigin="anonymous">
     <title>Employee Registration Form</title>
 </head>
 <body>
@@ -17,22 +16,22 @@
         <h5 class="form-info-text">
             Hover over input bar to see specific instructions (if any)
         </h5>
-        <label for="email">Email <i class="fas fa-envelope"></i></label>
+        <label for="email">Email 
         <input type="email" name="email" required>
 
-        <label for="password">Password <i class="fas fa-lock"></i></label>
+        <label for="password">Password 
         <input type="password" name="password" required>
 
-        <label for="confirm-password">Confirm Password <i class="fas fa-lock"></i></label>
+        <label for="confirm-password">Confirm Password 
         <input type="password" name="confirm-password" required>
 
-        <label for="role">Role <i class="fas fa-user"></i></label>
+        <label for="role">Role 
         <select name="role" required>
             <option value="cashier">Cashier</option>
             <option value="manager">Manager</option>
         </select>
 
-        <label for="employee_id">Employee ID <i class="fas fa-id-badge"></i></label>
+        <label for="employee_id">Employee ID 
         <input type="text" name="employee_id" required>
 
         <button type="submit" form="registration-form">Submit</button>

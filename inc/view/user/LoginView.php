@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href=<?=CSS_URL."login-form.css"?>>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>Login Page</title>
 </head>
 <body>
@@ -19,15 +18,12 @@
                                 <div class="form-group">
                                     <label for="email">
                                         Email address
-                                        <i class="fas fa-envelope"></i>
                                     </label>
                                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">
-
                                         Password
-                                        <i class="fas fa-lock"></i>
                                     </label>
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                 </div>
