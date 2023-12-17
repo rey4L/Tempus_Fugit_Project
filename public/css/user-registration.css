@@ -1,65 +1,101 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #3498db, #2c3e50);
+}
+
 .registration-form {
-    width: 80%;
-    margin: 4vh auto;
-    background-color: #F8FCFF;
-    border: 4px solid #085993;
-    border-radius: 30px;
+    width: 500px;
+    background: #fff;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(255, 105, 180, 0.5);
+    animation: borderGlow 2s infinite alternate;
 }
 
-.registration-form input,
-.registration-form select {
-    box-sizing: border-box;
-    display: block;
-    width: calc(94% - 20px);
-    margin: 0 3% 1vh 3%;
-    font-size: 1.2em;
-    padding: 0.5em;
+@keyframes borderGlow {
+    0% {
+        box-shadow: 0 8px 16px rgba(255, 105, 180, 0.5); 
+    }
+    100% {
+        box-shadow: 0 8px 16px rgba(255, 105, 180, 0.5); 
+    }
 }
 
-.employee-back-form {
-    width: 80%;
-    margin: 4vh auto;
-}
-
-.registration-form label {
-    font-size: 2em;
-    margin: 0 3%;
-}
-
-.registration-form button {
-    display: block;
-    width: 30%;
-    margin: 2vh auto;
-    padding: 10px;
-    font-size: 1.5em;
-    background-color: #4CAF50;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.2s linear;
-}
-
-.registration-form .employee-add-back-button {
-    background-color: #449AFF;
-}
-
-.registration-form button:hover {
-    background-color: #45a049;
-}
-
-.registration-form .employee-add-back-button:hover {
-    background-color: #4c9fff;
-}
 
 .form-name-text {
+    font-size: 2em;
+    font-weight: bold;
     text-align: center;
-    font-size: 2.5em;
-    margin-bottom: 1%;
+    color: #3498db;
+    margin-bottom: 20px;
 }
 
 .form-info-text {
+    color: #555;
+    font-size: 1.2em; 
     text-align: center;
-    font-size: 1.2em;
-    margin-bottom: 1%;
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-weight: normal; 
+    color: #555;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+input:focus,
+select:focus {
+    border-color: #3498db; 
+}
+
+button {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: #fff;
+    padding: 15px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #2980b9, #3498db);
+}
+
+.registration-back-form {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.registration-back-form button {
+    background-color: #95a5a6;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.registration-back-form button:hover {
+    background-color: #7f8c8d;
 }
