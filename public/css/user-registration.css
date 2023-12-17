@@ -93,9 +93,17 @@ button:hover {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-weight: bold;
     font-size: 16px;
 }
 
 .registration-back-form button:hover {
     background-color: #7f8c8d;
+}
+
+.registration-form button {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    font-weight: bold;
 }

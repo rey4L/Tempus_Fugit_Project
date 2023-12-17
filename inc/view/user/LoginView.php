@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href=<?=CSS_URL."login-form.css"?>>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <title>Login Page</title>
 </head>
 <body>
@@ -15,14 +16,22 @@
                         <div class="card-body">
                             <h3 class="card-title text-center">Login</h3>
                             <form action="<?= BASE_URL . "/user/login"?>" method="post">                                
-                            <div class="form-group">
-                                    <label for="email">Email address</label>
+                                <div class="form-group">
+                                    <label for="email">
+                                        Email address
+                                        <i class="fas fa-envelope"></i>
+                                    </label>
                                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="password">
+
+                                        Password
+                                        <i class="fas fa-lock"></i>
+                                    </label>
                                     <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                 </div>
+                                <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Login</button>
                             </form>
                                 
@@ -37,3 +46,4 @@
     </div>
 </body>
 </html>
+

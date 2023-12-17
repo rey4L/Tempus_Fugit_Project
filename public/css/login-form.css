@@ -89,3 +89,13 @@ body, html {
     color: #2980b9;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
+
+.btn-custom,
+.btn-primary {
+    padding: 11px 19px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 16px; 
+    margin-top: 20px; 
+    font-weight: bold;
+}
+
