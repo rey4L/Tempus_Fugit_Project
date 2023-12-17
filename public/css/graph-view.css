@@ -4,6 +4,7 @@
     box-sizing: border-box;
 }
 
+.switch-graph-button,
 .graph-back-button {
     text-align: center;
     border: 2px solid #95C5FF;
@@ -15,6 +16,7 @@
     margin: 3vh 0 0 0;
 }
 
+.switch-graph-button,
 .graph-back-button:hover {
     background-color: white;
     color: #95C5FF;

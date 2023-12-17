@@ -123,8 +123,14 @@
                     <label for="edit-item-ingredients">Ingredients</label>
                     <input type="text" id="edit-item-ingredients" name="edit-item-ingredients" value="<?=$item['ingredients']; ?>" required>
 
+                    <label for="edit-item-cost-to-produce">Cost to produce</label>
+                    <input type="text" id="edit-item-cost-to-produce" name="edit-item-cost-to-produce" value="<?=$item['cost_to_produce']; ?>" required>
+
                     <label for="edit-item-price">Price</label>
                     <input type="text" id="edit-item-price" name="edit-item-price" value="<?=$item['price']; ?>" required>
+
+                    <label for="edit-item-stock">Stock</label>
+                    <input type="text" id="edit-item-stock" name="edit-item-stock" value="<?=$item['stock_count']; ?>" required>
 
                     <label for="edit-item-image">Image</label>
                     <input type="text" id="edit-item-image" name="edit-item-image" value="<?=$item['image']; ?>" required>

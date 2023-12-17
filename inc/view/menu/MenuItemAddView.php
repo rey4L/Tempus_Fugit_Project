@@ -23,8 +23,14 @@
         <label for="price">Price</label>
         <input type="text" name="price" required>
 
+        <label for="cost-to-produce">Cost to produce</label>
+        <input type="text" name="cost-to-produce" required>
+
         <label for="description">Description</label>
         <input type="text" name="description" required>
+
+        <label for="stock">Stock</label>
+        <input type="text" name="stock" required>
 
         <label for="image">Image Url</label>
         <input type="text" name="image" required>

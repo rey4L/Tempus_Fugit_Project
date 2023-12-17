@@ -20,6 +20,7 @@
     <input type="hidden" name="end" id="end" value="<?=$data['end']?>">
 
     <div class="graph-div">
+        <button class="switch-graph-button">Switch Graph</button>
         <canvas id="myChart"></canvas>
     </div>
 
