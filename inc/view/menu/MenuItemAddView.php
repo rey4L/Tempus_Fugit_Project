@@ -17,8 +17,8 @@
         <label for="name">Name</label>
         <input type="text" name="name" required>
 
-        <label for="tags">Tags</label>
-        <input type="text" name="tags" title="No spaces, separated by commas(,)" required>
+        <label for="tags">Tags <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="No spaces, separated by commas(,)"></label>
+        <input type="text" name="tags" required>
 
         <label for="price">Price</label>
         <input type="text" name="price" required>
@@ -38,8 +38,8 @@
         <label for="discount">Discount</label>
         <input type="text" name="discount" required>
 
-        <label for="ingredients">Ingredients</label>
-        <input type="text" name="ingredients" title="No spaces, separated by commas(,)" required>
+        <label for="ingredients">Ingredients <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="No spaces, separated by commas(,)"></label>
+        <input type="text" name="ingredients" required>
 
         <button type="submit">Submit</button>
         <button type="submit" class="menu-back-button" form="menu-back-form">Back To List</button>

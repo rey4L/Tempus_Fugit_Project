@@ -47,7 +47,7 @@
                 <input type="date" name="end-date">
 
                 <button class="graph-button">
-                    Items Sold <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="" title="Select dates then select this option">
+                    Items Sold <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="Select dates then select this option">
                 </button>
             </form>
             

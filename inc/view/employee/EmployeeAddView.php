@@ -14,17 +14,14 @@
         <p class="form-name-text">
             EMPLOYEE REGISTRATION
         </p>
-        <h5 class="form-info-text">
-            Hover over input bar to see specific instructions (if any)
-        </h5>
         <label for="first-name">First Name</label>
         <input type="text" name="first-name" required>
 
         <label for="last-name">Last Name</label>
         <input type="text" name="last-name" required>
 
-        <label for="other-names">Other Names</label>
-        <input type="text" name="other-names" title="No spaces, separate by ','">
+        <label for="other-names">Other Names <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="No spaces, separated by commas(,)"></label>
+        <input type="text" name="other-names">
 
         <label for="gender">Gender</label>
         <select name="gender" required>
