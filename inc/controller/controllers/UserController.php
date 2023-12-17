@@ -65,11 +65,13 @@ class UserController extends BaseController {
         list(
             $email,
             $password,
+            $con_pass,
             $role,
             $employee_id
         ) = $this->validator->sanitize(
             $_POST['email'],
             $_POST['password'],
+            $_POST['con_pass'],
             $_POST['role'],
             $_POST['employee_id']
         );
@@ -77,6 +79,7 @@ class UserController extends BaseController {
         if (!$this->validateInputs(
             $email,
             $password,
+            $con_pass,
             $role,
             $employee_id,
         ))return;
@@ -91,7 +94,7 @@ class UserController extends BaseController {
         $this->anchor("user");
     }
 
-    private function validateInputs($email, $password, $role, $employee_id) {
+    private function validateInputs($email, $password,$con_pass, $role, $employee_id) {
         switch (false) {
             
             case $this->validator->isEmail($email):
@@ -102,6 +105,12 @@ class UserController extends BaseController {
 
             case $this->validator->validatePassword($password):
                 $this->error("password is required to be greater than 5 letters");
+                $this->view("user/Register");
+                return false;
+                break;
+
+            case $this->validator->verifyPassword($password,$con_pass):
+                $this->error("password fields do not match");
                 $this->view("user/Register");
                 return false;
                 break;
@@ -133,7 +142,7 @@ class UserController extends BaseController {
 
             case $this->validator->validatePassword($password):
                 $this->error("Password must be of mininum 8 characters. Contain atleat 1 uppercase, 1 lowercase, 1 special character and 1 number!");
-                $this->view("user/Register");
+                $this->view("user");
                 return false;
                 break;
             default:

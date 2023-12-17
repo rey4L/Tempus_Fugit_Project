@@ -4,7 +4,7 @@
 class UserValidator extends Validator
 {
 
-    function validatePassword($password) {
+    public function validatePassword($password) {
    
         $minLength = 8;
    
@@ -29,6 +29,11 @@ class UserValidator extends Validator
         }
 
         return true;
+    }
+
+    public function verifyPassword($password,$con_pass){
+        return ($password != $con_pass) ? false : true;
+
     }
 
     public function validateRole($role) {

@@ -78,14 +78,36 @@ class MenuItemController extends BaseController {
 
     public function update($id) {
 
-        $name = $_POST['edit-item-name'];
-        $price = $_POST['edit-item-price'];
-        $description = $_POST['edit-item-description'];
-        $image = $_POST['edit-item-image'];
-        $discount = $_POST['edit-item-discount'];
-        $tags = $_POST['edit-item-tags'];
-        $ingredients = $_POST['edit-item-ingredients'];
+        list(
+            $name,
+            $price,
+            $description,
+            $image,
+            $discount,
+            $tags,
+            $ingredients
 
+        ) = $this->validator->sanitize(
+            $_POST['name'],
+            $_POST['price'],
+            $_POST['description'],
+            $_POST['image'],
+            $_POST['discount'],
+            $_POST['tags'],
+            $_POST['ingredients']
+        );
+
+        if (!$this->validateInputs(
+            $name, 
+            $price, 
+            $description, 
+            $image, 
+            $discount, 
+            $tags, 
+            $ingredients
+        )) {
+            return;
+        }
         $this->model->set_id($id);
         $this->model->set_name($name);
         $this->model->set_price($price);

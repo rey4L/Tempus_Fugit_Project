@@ -24,7 +24,7 @@
         <input type="password" name="password" required>
 
         <label for="confirm-password">Confirm Password</label>
-        <input type="password" name="confirm-password" required>
+        <input type="password" name="con_pass" required>
 
         <label for="role">Role</label>
         <select name="role" required>
