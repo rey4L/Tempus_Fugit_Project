@@ -33,7 +33,6 @@
     <!-- SEARCH BAR -->
 
     <!-- GRAPH BUTTONS -->
-
     <div class="graph-div">
         <p class="graph-text">Graphs:</p>
 
@@ -43,7 +42,6 @@
             <button class="graph-button">Items Sold</button>
         </div>
     </div>
-
     <!-- GRAPH BUTTONS -->
 
     <!-- SELECT * QUERY -->

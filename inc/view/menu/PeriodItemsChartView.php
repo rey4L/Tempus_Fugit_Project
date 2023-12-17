@@ -23,7 +23,7 @@
     </div>
 
     <form class="back-to-register-form" action="">
-        <button class="graph-back-button">Back to Register</button>
+        <button class="graph-back-button">Back to Menu</button>
     </form>
 
     <script>
