@@ -39,7 +39,18 @@
         <div class="button-container">
             <button class="graph-button">Most Sold</button>
             <button class="graph-button">Most Profitable</button>
-            <button class="graph-button">Items Sold</button>
+            <form action="">
+                <label for="start-date">Start</label>
+                <input type="date" name="start-date">
+
+                <label for="end-date">End</label>
+                <input type="date" name="end-date">
+
+                <button class="graph-button">
+                    Items Sold <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="" title="Select dates then select this option">
+                </button>
+            </form>
+            
         </div>
     </div>
     <!-- GRAPH BUTTONS -->
