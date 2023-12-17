@@ -82,8 +82,8 @@ body {
     font-weight: bold;
     display: block;
     width: auto;
-    margin: 0 auto; /* Center the button horizontally */
-    margin-bottom: 10px; /* Add some bottom margin for spacing between buttons */
+    margin: 0 auto; 
+    margin-bottom: 10px; 
 }
 
 .employee-registration-form button:hover,
