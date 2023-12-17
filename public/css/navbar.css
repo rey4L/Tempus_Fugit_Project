@@ -33,6 +33,7 @@
     height: 8vh;
     object-fit: cover;
     border-radius: 50%;
+    border: 2px solid;
     margin-right: 8px;
 }
 
@@ -48,5 +49,15 @@
 
 .profile-info-container a {
     color: #f0f0f0;
+    text-decoration: underline;
+}
+
+form button {
+    color: white;
+    background-color: transparent;
+    border: none;
+}
+
+form button:hover {
     text-decoration: underline;
 }

@@ -38,7 +38,7 @@
         <button type="submit" form="registration-form">Submit</button>
     </form>
     <form id="registration-back-form" class="registration-back-form" action="<?=BASE_URL."/User"?>" method="post">
-         <button type="submit">Back To Login</button>
+        <button type="submit">Back To Login</button>
     </form>
 
 </body>

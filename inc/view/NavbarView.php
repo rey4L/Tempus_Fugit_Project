@@ -14,7 +14,9 @@
             <img class="profile-picture" src="<?=RESOURCE_URL. "office_guy.png"?>" alt="">
             <div class="profile-details">
                 <p class="profile-username">USERNAME HERE</p>
-                <a href="#">Log Out</a>
+                <form action="<?=BASE_URL?>">
+                    <button type="submit">Log Out</button>
+                </form>
             </div>
         </div>
         
