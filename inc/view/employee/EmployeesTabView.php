@@ -37,9 +37,7 @@
             </button>
         </form>
 
-        <form action=<?=BASE_URL."/employee"?> method="POST">
-            <button class="clear-search" type="submit">Clear Search</button>
-        </form>
+     
       
         <form action=<?=BASE_URL."/employee/filterByStatus/employee=EmployeesTab"?> method="POST">
             <select class="search-bar-dropdown-1" name="status" id="status" onchange="this.form.submit()">
@@ -48,6 +46,10 @@
                 <option value="onleave">On Leave</option>
                 <option value="dismissed">Dismissed</option>
             </select>
+        </form>
+
+        <form action=<?=BASE_URL."/employee"?> method="POST">
+            <button class="clear-search" type="submit">Clear Search</button>
         </form>
 
         <form action="<?=BASE_URL."/employee/view/employee=EmployeeAdd"?>" method="POST">

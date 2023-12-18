@@ -6,7 +6,7 @@ body {
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, #3498db, #2ecc71);
+    background: linear-gradient(135deg, #3498db, #2c3e50);
 }
 
 .menu-item-add-form {
@@ -24,7 +24,7 @@ body {
     font-size: 2.8em;
     font-weight: bold;
     text-align: center;
-    background: linear-gradient(135deg, #3498db, #2ecc71);
+    background: linear-gradient(135deg, #3498db, #2c3e50);
     -webkit-background-clip: text;
     color: transparent;
     margin-bottom: 20px; 
@@ -66,7 +66,7 @@ body {
 
 .menu-item-add-form button,
 .menu-item-add-form .menu-back-button button {
-    background: linear-gradient(135deg, #3498db, #2ecc71);
+    background: linear-gradient(135deg, #3498db, #2c3e50);
     color: #fff;
     padding: 18px 30px;
     border: none;
@@ -83,7 +83,7 @@ body {
 
 .menu-item-add-form button:hover,
 .menu-item-add-form .menu-back-button button:hover {
-    background: linear-gradient(135deg, #2ecc71, #3498db);
+    background: linear-gradient(135deg, #3498db, #2c3e50);
 }
 
 .menu-item-add-form .menu-back-button {

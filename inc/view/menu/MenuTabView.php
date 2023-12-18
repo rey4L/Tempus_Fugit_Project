@@ -41,7 +41,7 @@
                 <button class="graph-button">Most Sold</button>
             </form>
           
-            <form action="<?=BASE_URL."/menuitem/showMostSoldItems"?>" method="POST">
+            <form action="<?=BASE_URL."/menuitem/showMostProfitableItems"?>" method="POST">
                 <button class="graph-button">Most Profitable</button>
             </form>
            
@@ -132,31 +132,31 @@
 
                 <form action=<?= BASE_URL."/MenuItem/update/".$item['id']?> method="post">
                     <label for="edit-item-name">Name</label>
-                    <input type="text" id="edit-item-name" name="edit-item-name" value="<?=$item['name']; ?>" required>
+                    <input type="text" id="edit-item-name" name="name" value="<?=$item['name']; ?>" required>
 
                     <label for="edit-item-description">Description</label>
-                    <input type="text" id="edit-item-description" name="edit-item-description" value="<?=$item['description']; ?>" required>
+                    <input type="text" id="edit-item-description" name="description" value="<?=$item['description']; ?>" required>
 
                     <label for="edit-item-ingredients">Ingredients</label>
-                    <input type="text" id="edit-item-ingredients" name="edit-item-ingredients" value="<?=$item['ingredients']; ?>" required>
+                    <input type="text" id="edit-item-ingredients" name="ingredients" value="<?=str_replace(' ', '',$item['ingredients'])?>" required>
 
                     <label for="edit-item-cost-to-produce">Cost to produce</label>
-                    <input type="text" id="edit-item-cost-to-produce" name="edit-item-cost-to-produce" value="<?=$item['cost_to_produce']; ?>" required>
+                    <input type="text" id="edit-item-cost-to-produce" name="cost-to-produce" value="<?=$item['cost_to_produce']; ?>" required>
 
                     <label for="edit-item-price">Price</label>
-                    <input type="text" id="edit-item-price" name="edit-item-price" value="<?=$item['price']; ?>" required>
+                    <input type="text" id="edit-item-price" name="price" value="<?=$item['price']; ?>" required>
 
                     <label for="edit-item-stock">Stock</label>
-                    <input type="text" id="edit-item-stock" name="edit-item-stock" value="<?=$item['stock_count']; ?>" required>
+                    <input type="text" id="edit-item-stock" name="stock" value="<?=$item['stock_count']; ?>" required>
 
                     <label for="edit-item-image">Image</label>
-                    <input type="text" id="edit-item-image" name="edit-item-image" value="<?=$item['image']; ?>" required>
+                    <input type="text" id="edit-item-image" name="image" value="<?=$item['image']; ?>" required>
 
                     <label for="edit-item-discount">Discount</label>
-                    <input type="text" id="edit-item-discount" name="edit-item-discount" value="<?=$item['discount']; ?>" required>
+                    <input type="text" id="edit-item-discount" name="discount" value="<?=$item['discount']; ?>" required>
 
                     <label for="edit-item-discount">Tags</label>
-                    <input type="text" id="edit-item-tags" name="edit-item-tags" value="<?=$item['tags']; ?>" required>
+                    <input type="text" id="edit-item-tags" name="tags" value="<?=str_replace(' ', '',$item['tags']);?>" required>
                     <button type="submit">Save Changes</button>
                     
                 </form>

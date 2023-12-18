@@ -22,10 +22,7 @@
             <button type="submit" class="search-button"><img title="Search" class="search-icon" src="<?= RESOURCE_URL."search.png"?>" alt="Search Button"></button>
         </form>
 
-        <form action=<?=BASE_URL."/bill"?>>
-            <button class="clear-search" type="submit">Clear Search</button>
-        </form>
-      
+  
         <form action=<?=BASE_URL."/bill/filterByStatus/bill=BillsTab"?> method="POST">
             <select class="search-bar-dropdown-1" name="status" id="status" onchange="this.form.submit()">
                 <option disabled selected>Status</option>
@@ -35,7 +32,7 @@
             </select>
         </form>
 
-        <form action=<?=BASE_URL."/bill/filterByDate"?> method="POST">
+        <form action=<?=BASE_URL."/bill/filterByDate/bill=BillsTab"?> method="POST">
             <select class="search-bar-dropdown-2" name="date" id="date" onchange="this.form.submit()">
                 <option disabled selected>Date</option>
                 <option value="last-week">Last Week</option>
@@ -43,6 +40,11 @@
                 <option value="last-six-months">Last 6 Months</option>
             </select>
         </form>
+
+        <form action=<?=BASE_URL."/bill"?>>
+            <button class="clear-search" type="submit">Clear Search</button>
+        </form>
+      
 
         <form action=<?=BASE_URL."/register"?> method="POST">
             <button type="submit"class="search-bar-add-button"><img title="Add Bill" class="add-icon" src="<?= RESOURCE_URL."add.png"?>" alt="Add button"></button>
