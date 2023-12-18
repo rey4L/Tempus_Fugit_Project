@@ -21,46 +21,57 @@ class MenuItemController extends BaseController {
     public function create() {
         
         list(
-            $name,
-            $price,
-            $description,
-            $image,
-            $discount,
-            $tags,
-            $ingredients
-
-        ) = $this->validator->sanitize(
-            $_POST['name'],
-            $_POST['price'],
-            $_POST['description'],
-            $_POST['image'],
-            $_POST['discount'],
-            $_POST['tags'],
-            $_POST['ingredients']
-        );
-
-        if (!$this->validateInputs(
             $name, 
-            $price, 
+            $price,
+            $cost_to_produce,
             $description, 
             $image, 
             $discount, 
             $tags, 
-            $ingredients
+            $ingredients,
+            $stock_count,
+            $items_sold,
+            $profit_generated
+
+        ) = $this->validator->sanitize(
+            $_POST['name'],
+            $_POST['price'],
+            $_POST['cost_to_produce'],
+            $_POST['description'],
+            $_POST['image'],
+            $_POST['discount'],
+            $_POST['tags'],
+            $_POST['ingredients'],
+            $_POST['stock_count'],
+            $_POST['items_sold'],
+            $_POST['profit_generated']
+        );
+
+        if (!$this->validateInputs(
+            $name, 
+            $price,
+            $cost_to_produce,
+            $description, 
+            $image, 
+            $discount, 
+            $tags, 
+            $ingredients,
+            $stock_count,
+            $items_sold,
+            $profit_generated
         )) {
             return;
         }
 
         $this->model->set_name($name);
         $this->model->set_price($price);
+        $this->model->set_cost_to_produce($cost_to_produce);
         $this->model->set_description($description);
         $this->model->set_image($image);
         $this->model->set_discount($discount);
         $this->model->set_tags($tags);
         $this->model->set_ingredients($ingredients);
-
-        // need a field for set stock count
-        $this->model->set_stock_count(20);
+        $this->model->set_stock_count($stock_count);
         $this->model->set_items_sold(0);
         $this->model->set_profit_generated(0);
 
@@ -81,45 +92,55 @@ class MenuItemController extends BaseController {
         list(
             $name,
             $price,
+            $cost_to_produce,
             $description,
             $image,
             $discount,
             $tags,
-            $ingredients
+            $ingredients,
+            $stock_count,
+            $items_sold,
+            $profit_generated
 
         ) = $this->validator->sanitize(
             $_POST['name'],
             $_POST['price'],
+            $_POST['cost_to_produce'],
             $_POST['description'],
             $_POST['image'],
             $_POST['discount'],
             $_POST['tags'],
-            $_POST['ingredients']
+            $_POST['ingredients'],
+            $_POST['stock_count'],
+            $_POST['items_sold'],
+            $_POST['profit_generated']
         );
 
         if (!$this->validateInputs(
-            $name, 
-            $price, 
-            $description, 
-            $image, 
-            $discount, 
-            $tags, 
-            $ingredients
+            $name,
+            $price,
+            $cost_to_produce,
+            $description,
+            $image,
+            $discount,
+            $tags,
+            $ingredients,
+            $stock_count,
+            $items_sold,
+            $profit_generated
         )) {
             return;
         }
         $this->model->set_id($id);
         $this->model->set_name($name);
         $this->model->set_price($price);
-        $this->model->set_cost_to_produce("24.02");
+        $this->model->set_cost_to_produce($cost_to_produce);
         $this->model->set_description($description);
         $this->model->set_image($image);
         $this->model->set_discount($discount);
         $this->model->set_tags($tags);
         $this->model->set_ingredients($ingredients);
-
-        // need to get a field for setting stock count
-        $this->model->set_stock_count(20);
+        $this->model->set_stock_count($stock_count);
         $this->model->set_items_sold(0);
         $this->model->set_profit_generated(0);
 
@@ -290,7 +311,7 @@ class MenuItemController extends BaseController {
         }
     }
 
-    private function validateInputs($name, $price, $description, $image, $discount, $tags, $ingredients) {
+    private function validateInputs($name, $price, $cost_to_produce, $description, $image, $discount, $tags, $ingredients, $stock_count, $items_sold, $profit_generated) {
         switch (false) {
             case $this->validator->isString($name):
                 $this->error("Name should not be empty!");
@@ -299,6 +320,11 @@ class MenuItemController extends BaseController {
                 break;
             case $this->validator->isInt($price):
                 $this->error("Price should be a number!. Example: 1, 24.5");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isFloat($cost_to_produce):
+                $this->error("Cost to produce should be a valid floating number! Example 0.1, 4");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
@@ -329,6 +355,21 @@ class MenuItemController extends BaseController {
                 break;
             case $this->validator->validateTags($ingredients):
                 $this->error("Ingredients should be in valid format and should not be empty! Example ingredient1,ingredient2");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isInt($stock_count):
+                $this->error("Stock count should be a number!");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isInt($items_sold):
+                $this->error("Items sold should be a number!");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->isFloat($profit_generated):
+                $this->error("Profit generated should be a valid floating number! Example 0.1, 4");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
