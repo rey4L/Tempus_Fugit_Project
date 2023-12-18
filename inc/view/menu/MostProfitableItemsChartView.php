@@ -39,7 +39,7 @@
             data: {
                 labels: labels,
                 datasets: [{
-                    label: 'Profit Generated',
+                    label: 'Profit Generated in Guyana dollars',
                     data: data,
                     borderWidth: 1
                 }]
