@@ -44,4 +44,9 @@ class UserManager {
         
         return false;
     }
+    
+    public function getUserById($id) {
+        $this->userModel->set_id($id);
+        return $this->userModel->findById();
+    }
 }

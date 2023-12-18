@@ -71,7 +71,7 @@ class UserController extends BaseController {
         ) = $this->validator->sanitize(
             $_POST['email'],
             $_POST['password'],
-            $_POST['con_pass'],
+            $_POST['confirm-password'],
             $_POST['role'],
             $_POST['employee_id']
         );
