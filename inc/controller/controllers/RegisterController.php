@@ -50,7 +50,7 @@ class RegisterController extends BaseController {
         $stockCount = $this->manager->getStockCountForMenuItem($menuId);
         
         if (!$this->validator->validateNumberOfItems($amount, $stockCount)) {
-            if($stockCount == 0) {
+            if($stockCount <= 0) {
                 $this->error("Out of stock!");
             } else {
                 $this->error("The amount value must be between 1 and Remaining stock: $stockCount!");

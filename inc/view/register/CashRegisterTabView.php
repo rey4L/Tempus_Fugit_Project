@@ -33,7 +33,7 @@
                                 <select name='name' required>
                                     <?php foreach($data['menuList'] as $menuItem) :?>
                                         <option value="<?=$menuItem['name'].",".$menuItem['id'];?>">
-                                            <?=$menuItem['name'];?>
+                                            <?=$menuItem['name']." | Stock: ".$menuItem['stock_count']. " left."?>
                                         </option>
                                     <?php endforeach ?>
                                 </select>
