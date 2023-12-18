@@ -24,9 +24,12 @@ body {
     font-size: 2.8em;
     font-weight: bold;
     text-align: center;
-    color: #3498db;
-    margin-bottom: 20px;
+    background: linear-gradient(135deg, #3498db, #2ecc71);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 20px; 
 }
+
 
 .menu-item-add-form .form-info-text {
     color: #555;
