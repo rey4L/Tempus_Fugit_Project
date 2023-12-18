@@ -12,7 +12,7 @@
     <form action="<?=BASE_URL."/MenuItem"?>"method="POST" id="menu-back-form"></form>
     <form class="menu-item-add-form" action="<?=BASE_URL."/MenuItem/create"?>" method="post">
         <p class="form-name-text">
-            MENU ITEM REGISTRATION
+            CREATE MENU ITEM
         </p>
         <label for="name">Name</label>
         <input type="text" name="name" required>
