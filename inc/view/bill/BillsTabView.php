@@ -32,7 +32,7 @@
             </select>
         </form>
 
-        <form action=<?=BASE_URL."/bill/filterByDate"?> method="POST">
+        <form action=<?=BASE_URL."/bill/filterByDate/bill=BillsTab"?> method="POST">
             <select class="search-bar-dropdown-2" name="date" id="date" onchange="this.form.submit()">
                 <option disabled selected>Date</option>
                 <option value="last-week">Last Week</option>

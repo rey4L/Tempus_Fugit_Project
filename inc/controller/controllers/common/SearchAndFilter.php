@@ -57,10 +57,15 @@ trait SearchAndFilter {
         $this->view($viewPath, $data = $data);
     }
 
-    public function filterByDate() {
+    public function filterByDate($viewPath) {
         $currentDate = date('Y-m-d');
         $date = $this->validator->sanitize($_POST['date']);
-        $date = $this->validator->isString($date);
+
+        if (!$this->validator->isString($date)) {
+            $this->error("Query should not be empty!");
+            $this->index();
+            return;
+        }
 
         switch ($date) {
             case 'last-week':
@@ -78,7 +83,7 @@ trait SearchAndFilter {
 
         $this->model->set_order_date($date);
         $data = $this->model->findAllWhereDateGreaterThan();
-        $this->view("bill/BillsTab", $data);
+        $this->view($viewPath, $data);
     }
 }
 
