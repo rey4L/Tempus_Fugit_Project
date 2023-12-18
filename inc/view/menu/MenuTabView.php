@@ -46,17 +46,17 @@
             </form>
            
             <form action="<?=BASE_URL."/menuitem/showMostSoldWithinPeriodLine"?>" method="POST">
+                <button class="graph-button right-most">
+                    Items Sold <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="Select the start and end dates then select this option to show items sold over the specified period.">
+                </button>
+
                 <label for="start-date">Start</label>
                 <input type="date" name="start-date">
 
                 <label for="end-date">End</label>
                 <input type="date" name="end-date">
 
-                <button class="graph-button">
-                    Items Sold <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="Select dates then select this option">
-                </button>
             </form>
-            
         </div>
     </div>
     <!-- GRAPH BUTTONS -->
