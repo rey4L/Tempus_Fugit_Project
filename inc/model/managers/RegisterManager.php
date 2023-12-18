@@ -88,4 +88,9 @@ class RegisterManager {
         return $this->billItemModel->findAllForBill();
     }
 
+    public function getStockCountForMenuItem($id) {
+        $this->menuItemModel->set_id($id);
+        return $this->menuItemModel->findById()['stock_count'];
+    }
+
 }

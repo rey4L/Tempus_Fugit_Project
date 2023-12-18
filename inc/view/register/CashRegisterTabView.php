@@ -43,8 +43,7 @@
                                 <input 
                                     type='number' 
                                     min="1",
-                                    max="50",
-                                    name=<?='amount'?> 
+                                    name='amount' 
                                     placeholder="Enter the number of items here..."
                                     required
                                 >

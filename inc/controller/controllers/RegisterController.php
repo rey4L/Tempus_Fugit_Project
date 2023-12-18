@@ -47,10 +47,17 @@ class RegisterController extends BaseController {
             $menuId) = $this->validator->sanitize($name, $menuId);
 
         $amount = $this->validator->sanitize($_POST['amount']);
+        $stockCount = $this->manager->getStockCountForMenuItem($menuId);
         
-        if (!$this->validator->validateNumberOfItems($amount, 50)) {
-            $this->error("The amount value must be between 1 and 50. Please do not alter the webpage!");
+        if (!$this->validator->validateNumberOfItems($amount, $stockCount)) {
+            if($stockCount == 0) {
+                $this->error("Out of stock!");
+            } else {
+                $this->error("The amount value must be between 1 and Remaining stock: $stockCount!");
+            }
+           
             $this->index();
+            return;
         }
         
         $discount = $this->manager->queryDiscountForMenuItem($menuId);
