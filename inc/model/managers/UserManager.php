@@ -3,9 +3,11 @@
 class UserManager {
 
     private $userModel;
+    private $employeeModel;
 
     public function __construct() {
         $this->userModel = new UserModel();
+        $this->employeeModel = new EmployeeModel();
     }
     
     public function createStandardUser($email, $password, $employee_id) {
@@ -36,7 +38,7 @@ class UserManager {
 
     public function validateUser($email, $password){
         $this->userModel->set_email($email);
-        $user = $this->userModel->findByEmail($email);
+        $user = $this->userModel->findByEmail();
         
         if (isset($user) && password_verify($password, $user['password'])) {
             return $user;
@@ -44,9 +46,14 @@ class UserManager {
         
         return false;
     }
-    
-    public function getUserById($id) {
-        $this->userModel->set_id($id);
-        return $this->userModel->findById();
+
+    public function verifyUserEmail($email) {
+        $this->userModel->set_email($email);
+        return $this->userModel->findByEmail();
+    }
+
+    public function verifyEmployeeId($id) {
+        $this->employeeModel->set_id($id);
+        return $this->employeeModel->findById();
     }
 }

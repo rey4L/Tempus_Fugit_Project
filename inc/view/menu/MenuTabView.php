@@ -36,10 +36,16 @@
     <div class="graph-div">
         <p class="graph-text">Graphs:</p>
 
-        <div class="button-container">
-            <button class="graph-button">Most Sold</button>
-            <button class="graph-button">Most Profitable</button>
-            <form action="">
+        <div class="button-container" method="POST">
+            <form action="<?=BASE_URL."/menuitem/showMostSoldItems"?>" method="POST">
+                <button class="graph-button">Most Sold</button>
+            </form>
+          
+            <form action="<?=BASE_URL."/menuitem/showMostSoldItems"?>" method="POST">
+                <button class="graph-button">Most Profitable</button>
+            </form>
+           
+            <form action="<?=BASE_URL."/menuitem/showMostSoldWithinPeriodLine"?>" method="POST">
                 <label for="start-date">Start</label>
                 <input type="date" name="start-date">
 

@@ -66,12 +66,12 @@ class MenuItemModel extends BaseModel {
     }
 
     public function findAllByItemsSold() {
-        $statement = $this->connection->query("SELECT * FROM MenuItem ORDER BY items_sold DESC");
+        $statement = $this->connection->query("SELECT * FROM MenuItem WHERE items_sold > 0 ORDER BY items_sold DESC");
         return $statement->fetchAll(); 
     }
 
     public function findAllByMostProfitGenerated() {
-        $statement = $this->connection->query("SELECT * FROM MenuItem ORDER BY profit_generated DESC");
+        $statement = $this->connection->query("SELECT * FROM MenuItem WHERE profit_generated > 0 ORDER BY profit_generated DESC");
         return $statement->fetchAll(); 
     }
 

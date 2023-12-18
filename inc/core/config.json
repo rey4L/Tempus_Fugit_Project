@@ -4,7 +4,7 @@
         "showMostProfitableItems",
         "showMostSoldItems",
         "showMostSoldWithinPeriod",
-        "showMostSoldWithinPeriod2",
+        "showMostSoldWithinPeriodLine",
         "logout",
         "login",
         "register",
@@ -28,7 +28,11 @@
         "login",
         "logout",
         "register",
-        "registerPage"
+        "registerPage",
+        "showMostProfitableItems",
+        "showMostSoldItems",
+        "showMostSoldWithinPeriod",
+        "showMostSoldWithinPeriodLine"
     ],
     "CASHIER" : [
         "UserController",

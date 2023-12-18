@@ -33,17 +33,11 @@ class UserValidator extends Validator
 
     public function verifyPassword($password,$con_pass){
         return ($password != $con_pass) ? false : true;
-
     }
 
     public function validateRole($role) {
         $roles = ['manager', 'cashier'];
         return in_array($role, $roles);
-    }
-
-    public function validateEmployeeId($employee_id) {
-        $employee_id = intval($employee_id);
-        return is_int($employee_id);
     }
 
 }

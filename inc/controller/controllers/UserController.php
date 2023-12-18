@@ -41,7 +41,7 @@ class UserController extends BaseController {
             $_SESSION['user_role'] = $isValidUser['role'];
             $this->anchor("register");
         } else {
-            $this->error("Invalid Credentials. Please try again");
+            $this->error("Password for user with email $email is incorrect. Please try again!");
             $this->view("user/Login");
         }  
     }
@@ -76,7 +76,7 @@ class UserController extends BaseController {
             $_POST['employee_id']
         );
 
-        if (!$this->validateInputs(
+        if (!$this->validateRegisterInputs(
             $email,
             $password,
             $con_pass,
@@ -94,35 +94,51 @@ class UserController extends BaseController {
         $this->anchor("user");
     }
 
-    private function validateInputs($email, $password,$con_pass, $role, $employee_id) {
+    private function validateRegisterInputs($email, $password,$con_pass, $role, $employee_id) {
         switch (false) {
             
             case $this->validator->isEmail($email):
-                $this->error("Email invalid Type");
+                $this->error("Email should not be empty and of format like youremail@gmail.com!");
                 $this->view("user/Register");
                 return false;
                 break;
-
+            case $this->validator->isString($password):
+                $this->error("Password should not be empty!");
+                $this->view("user/Register");
+                return false;
+                break;
+            case $this->validator->isString($con_pass):
+                $this->error("Confirm password should not be empty!");
+                $this->view("user/Register");
+                return false;
+                break;
+            case $this->validator->isString($role):
+                $this->error("Role should not be empty!");
+                $this->view("user/Register");
+                return false;
+                break;
+            case $this->validator->isInt($employee_id):
+                $this->error("Employee should be a integer number! Example: 5.");
+                $this->view("user/Register");
+                return false;
+                break;
             case $this->validator->validatePassword($password):
-                $this->error("password is required to be greater than 5 letters");
+                $this->error("Password must be of mininum 8 characters. Contain atleat 1 uppercase, 1 lowercase, 1 special character and 1 number!");
                 $this->view("user/Register");
                 return false;
                 break;
-
             case $this->validator->verifyPassword($password,$con_pass):
-                $this->error("password fields do not match");
+                $this->error("Password and confirm password fields do not match");
                 $this->view("user/Register");
                 return false;
                 break;
-
             case $this->validator->validateRole($role):
-                $this->error("role is invalid");
+                $this->error("Role is invalid. Please select a valid role from the dropdown!");
                 $this->view("user/Register");
                 return false;
                 break;
-
-            case $this->validator->validateEmployeeId($employee_id):
-                $this->error("employee_id is required to be a Number");
+            case $this->manager->verifyEmployeeId($employee_id):
+                $this->error("Employee with id $employee_id does not exist! Please ensure your employee id is valid!");
                 $this->view("user/Register");
                 return false;
                 break;
@@ -135,14 +151,18 @@ class UserController extends BaseController {
     private function validateLoginInputs($email, $password) {
         switch (false) {
             case $this->validator->isEmail($email):
-                $this->error("Email is not valid!");
-                $this->view("user/Register");
+                $this->error("Email should not be empty and of format like youremail@gmail.com!");
+                $this->view("user");
                 return false;
                 break;
-
-            case $this->validator->validatePassword($password):
-                $this->error("Password must be of mininum 8 characters. Contain atleat 1 uppercase, 1 lowercase, 1 special character and 1 number!");
+            case $this->validator->isString($password):
+                $this->error("Password should not be empty!");
                 $this->view("user");
+                return false;
+                break;
+            case $this->manager->verifyUserEmail($email):
+                $this->error("Unknown user with email $email");
+                $this->view("user/Register");
                 return false;
                 break;
             default:

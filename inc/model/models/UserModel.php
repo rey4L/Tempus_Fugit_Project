@@ -41,12 +41,12 @@ class UserModel extends BaseModel {
             return $statement->fetch();
         }
 
-        public function findByEmail($email) {
+        public function findByEmail() {
 
             $sql = "SELECT * FROM User WHERE email = :email";
 
             $statement = $this->connection->prepare($sql);
-            $statement->execute(['email' => $email]);
+            $statement->execute(['email' => $this->email]);
 
             return $statement->fetch();
         }

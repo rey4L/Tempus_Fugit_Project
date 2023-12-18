@@ -16,7 +16,7 @@ class MenuItemManager {
         $mostSoldItems = array_slice(
            $items,
             0,
-            10
+            count($items) < 10 ? count($items): 10
         );
 
         if (count($items) <= 3) return $mostSoldItems;
@@ -25,7 +25,7 @@ class MenuItemManager {
         $lastItemItemsSold = $mostSoldItems[$lastItemIndex]['items_sold'];
         $x = $lastItemIndex + 1;
 
-        // this checks for duplicate values
+        // this checks for duplicate values like if the 10th and 11th have the same number sold
         while ($x < count($items) - 1) {
             if($items[$x]['items_sold'] === $lastItemItemsSold) {
                 array_push($mostSoldItems, $items[$x]);
@@ -43,7 +43,7 @@ class MenuItemManager {
         $mostProfitableItems = array_slice(
            $items,
             0,
-            10
+            count($items) < 10 ? count($items) : 10
         );
 
         if (count($items) <= 3) return $mostProfitableItems;
@@ -52,7 +52,7 @@ class MenuItemManager {
         $lastItemProfitGenerated = $mostProfitableItems[$lastItemIndex]['profit_generated'];
         $x = $lastItemIndex + 1;
 
-        // this checks for duplicate values
+        //  // this checks for duplicate values like if the 10th and 11th have the same number profit generated
         while ($x < count($items) - 1) {
             if($items[$x]['profit_generated'] === $lastItemProfitGenerated) {
                 array_push($mostProfitableItems, $items[$x]);
@@ -66,6 +66,7 @@ class MenuItemManager {
     }
 
     public function getItemsSoldWithinPeriod($startDate, $endDate) {
+        $this->billModel->set_status("cancelled");
         $bills = $this->billModel->findAllWithinPeriod($startDate, $endDate); 
         $items = [
             "labels" => [],
@@ -89,7 +90,8 @@ class MenuItemManager {
         return $items;
     }
 
-    public function getItemsSoldWithinPeriod2($startDate, $endDate) {
+    public function getItemsSoldWithinPeriodLine($startDate, $endDate) {
+        $this->billModel->set_status("cancelled");
         $bills = $this->billModel->findAllWithinPeriod($startDate, $endDate);
 
   

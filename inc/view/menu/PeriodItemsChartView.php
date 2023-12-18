@@ -19,11 +19,17 @@
     <input type="hidden" name="end" id="end" value="<?=$data['end']?>">
 
     <div class="graph-div">
+        <form action="<?=BASE_URL."/menuitem/showMostSoldWithinPeriodLine"?>" method="POST">
+            <input type="hidden" name="start-date" id="start-date" value="<?=$data['start']?>">
+            <input type="hidden" name="end-date" id="end-date" value="<?=$data['end']?>">
+            <button class="switch-graph-button" type="submit">Switch Graph</button>
+        </form>
         <canvas id="myChart"></canvas>
     </div>
 
-    <form class="back-to-register-form" action="">
-        <button class="graph-back-button">Back to Menu</button>
+    <form class="back-to-register-form" action="<?=BASE_URL."/menuitem"?>">
+       
+        <button class="graph-back-button" type="submit">Back to Menu</button>
     </form>
 
     <script>

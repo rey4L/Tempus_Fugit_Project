@@ -2,12 +2,7 @@
 
 class EmployeeValidator extends Validator {
 
-    public function validateOtherNames($otherNames) {
-        if (empty($otherNames)) return true;
-        if (!$this->isString($otherNames)) false;
-        $pattern = '/^(\w+,)*\w+$/';
-        return preg_match($pattern, $otherNames) === 1;
-    }
+ 
   
     public function validateGender($gender) {
         $validGenders = [1, 0];

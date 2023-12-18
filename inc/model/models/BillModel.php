@@ -98,13 +98,14 @@ class BillModel extends BaseModel {
     }
 
     public function findAllWithinPeriod($startDate, $endDate) {
-        $sql = "SELECT * FROM Bill WHERE order_date >= :start_date AND order_date <= :end_date";
+        $sql = "SELECT * FROM Bill WHERE order_date >= :start_date AND order_date <= :end_date AND :status != status";
 
         $statement = $this->connection->prepare($sql);
         $statement->execute(
             [
                 'start_date' => $startDate,
-                'end_date' => $endDate
+                'end_date' => $endDate,
+                'status' => $this->status
             ]);
 
         return $statement->fetchAll();

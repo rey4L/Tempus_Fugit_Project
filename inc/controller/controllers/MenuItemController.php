@@ -129,13 +129,18 @@ class MenuItemController extends BaseController {
 
     public function showMostSoldItems() {
          
-        $items = $this->manager->getMostProfitableItems();
+        $items = $this->manager->getMostSoldItems();
         $labels = "";
         $values = "";
 
         foreach($items as $item) {
-            $labels = $labels.",".$item['name'];
-            $values = $values.",".$item['items_sold'];
+            if(!empty($labels)) {
+                $labels = $labels.",".$item['name'];
+                $values = $values.",".$item['items_sold'];
+            } else {
+                $labels = $item['name'];
+                $values = $item['items_sold'];
+            }
         }
 
         $data = [
@@ -153,8 +158,13 @@ class MenuItemController extends BaseController {
         $values = "";
 
         foreach($items as $item) {
-            $labels = $labels.",".$item['name'];
-            $values = $values.",".$item['profit_generated'];
+            if(!empty($labels)) {
+                $labels = $labels.",".$item['name'];
+                $values = $values.",".$item['profit_generated'];
+            } else {
+                $labels = $item['name'];
+                $values = $item['profit_generated'];
+            }
         }
 
         $data = [
@@ -165,10 +175,72 @@ class MenuItemController extends BaseController {
         $this->view("menu/MostProfitableItemsChart", $data);
     }
 
-    public function showMostSoldWithinPeriod2() {
-        $items = $this->manager->getItemsSoldWithinPeriod2(
-            '2023-11-01',
-            '2023-12-24'
+    public function showMostSoldWithinPeriod() {
+
+        list(
+            $startDate,
+            $endDate
+        ) = $this->validator->sanitize(
+            $_POST['start-date'],
+            $_POST['end-date']
+        );
+
+        if (!$this->validateGraphInputs(
+            $startDate,
+            $endDate
+        )) return;
+
+        $items = $this->manager->getItemsSoldWithinPeriod(
+            $startDate,
+            $endDate
+        );
+
+        $labels = "";
+        $values = "";
+
+        foreach ($items['labels'] as $label) {
+            if(!empty($labels)) {
+                $labels = $labels.",".$label;
+            } else {
+                $labels = $label;
+            }
+        }
+
+        foreach ($items['data'] as $data) {
+            if(!empty($values)) {
+                $values = $values.",".$data;
+            } else {
+                $values = $data;
+            }
+        }
+
+        $data = [
+            "start"=>$startDate,
+            "end"=>$endDate,
+            "labels" => $labels,
+            "data" => $values,
+        ];
+
+        $this->view("menu/PeriodItemsChart", $data);
+    }
+
+    public function showMostSoldWithinPeriodLine() {
+        list(
+            $startDate,
+            $endDate
+        ) = $this->validator->sanitize(
+            $_POST['start-date'],
+            $_POST['end-date']
+        );
+
+        if (!$this->validateGraphInputs(
+            $startDate,
+            $endDate
+        )) return;
+
+        $items = $this->manager->getItemsSoldWithinPeriodLine(
+            $startDate,
+            $endDate
         );
 
         $labels = "";
@@ -193,50 +265,40 @@ class MenuItemController extends BaseController {
         $data = [
             "labels" => $labels,
             "data" => $values,
-            "start"=>'2023-11-01',
-            "end"=>'2023-12-24',
+            "start"=>$startDate,
+            "end"=>$endDate,
         ];
 
-        $this->view("menu/PeriodItemsChart2", $data);
+        $this->view("menu/PeriodItemsChartLine", $data);
     }
-    public function showMostSoldWithinPeriod() {
-        
 
-        $items = $this->manager->getItemsSoldWithinPeriod(
-            '2023-11-16',
-            '2023-11-24'
-        );
-
-        $labels = "";
-        $values = "";
-
-        foreach ($items['labels'] as $label) {
-            $labels = $labels.",".$label;
+    private function validateGraphInputs($startDate, $endDate) {
+        switch (false) {
+            case $this->validator->validateDate($startDate):
+                $this->error("Start date should be of valid format: yyyy-mm-dd");
+                $this->index();
+                return false;
+                break;
+            case $this->validator->validateDate($endDate):
+                $this->error("End date should be of valid format: yyyy-mm-dd");
+                $this->index();
+                return false;
+                break;
+            default:
+                return true;
+                break;
         }
-
-        foreach ($items['data'] as $data) {
-            $values = $values.",".$data;
-        }
-
-        $data = [
-            "start"=>'2023-11-16',
-            "end"=>'2023-11-24',
-            "labels" => $labels,
-            "data" => $values,
-        ];
-
-        $this->view("menu/PeriodItemsChart", $data);
     }
 
     private function validateInputs($name, $price, $description, $image, $discount, $tags, $ingredients) {
         switch (false) {
-            case $this->validator->validateName($name):
+            case $this->validator->isString($name):
                 $this->error("Name should not be empty!");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isInt($price):
-                $this->error("Price is not of type number");
+                $this->error("Price should be a number!. Example: 1, 24.5");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
@@ -251,17 +313,22 @@ class MenuItemController extends BaseController {
                 return false;
                 break;
             case $this->validator->isFloat($discount):
-                $this->error("Discount should be of type float!");
+                $this->error("Discount should be a valid floating number! Example 0.1, 4");
+                $this->view("menu/MenuItemAdd");
+                return false;
+                break;
+            case $this->validator->validateDiscount($discount):
+                $this->error("Discount should be between 1 and 0! Example 0.1");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->validateTags($tags):
-                $this->error("Tags should be in valid format and should not be empty!");
+                $this->error("Tags should be in valid format and should not be empty! Example tag1,tag2");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->validateTags($ingredients):
-                $this->error("Ingredients should be in valid format and should not be empty");
+                $this->error("Ingredients should be in valid format and should not be empty! Example ingredient1,ingredient2");
                 $this->view("menu/MenuItemAdd");
                 return false;
                 break;

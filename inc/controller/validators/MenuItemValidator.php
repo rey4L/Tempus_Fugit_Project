@@ -1,12 +1,12 @@
 <?php 
 
 class MenuItemValidator extends Validator {
-
     
-    public function validateName($name) {
-        if (is_string($name)) return true;
-        return false;
+    function validateDiscount($discount) {
+        if ($discount < 0 || $discount > 1) {
+            return false;
+        }
+        return true;
     }
-    
     
 }

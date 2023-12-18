@@ -20,9 +20,10 @@
         <canvas id="myChart"></canvas>
     </div>
 
-    <form class="back-to-register-form" action="">
-        <button class="graph-back-button">Back to Menu</button>
-    </form>
+    <form class="back-to-register-form" action="<?=BASE_URL."/menuitem"?>">
+       <button class="graph-back-button" type="submit">Back to Menu</button>
+   </form>
+
 
     <script>
         const ctx = document.getElementById('myChart');
@@ -31,7 +32,6 @@
         let data = rawData.split(",");
 
         let rawLabels = document.getElementById('labels').value;
-        console.log(rawLabels);
         let labels = rawLabels.split(",");
 
         new Chart(ctx, {
