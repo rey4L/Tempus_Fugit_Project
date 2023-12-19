@@ -61,10 +61,6 @@ label {
     transition: all 0.2 linear;
 }
 
-.cash-register-add-item-button:hover {
-   border: solid #449AFF 2px;
-}
-
 .cash-register-add-item-button:focus {
     outline: none;
     border: none;
