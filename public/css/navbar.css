@@ -37,14 +37,19 @@
     margin-right: 8px;
 }
 
-.profile-details {
-    display: flex;
-    flex-direction: column;
-}
-
 .profile-username {
     color: #f0f0f0;
     margin-bottom: 4px;
+    margin-left: 12px;
+    font-weight: bold;
+    font-size: 1.2em;  
+}
+
+.profile-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-right: 10px;    
 }
 
 .profile-info-container a {
@@ -53,11 +58,19 @@
 }
 
 form button {
+    margin-left: 12px;
     color: white;
     background-color: transparent;
     border: none;
+    cursor: pointer; 
+    
 }
 
 form button:hover {
     text-decoration: underline;
+}
+
+.navigation-bar .nav-button.active {
+    background-color: white;
+    color: black;
 }

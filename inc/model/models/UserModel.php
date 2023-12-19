@@ -12,13 +12,14 @@ class UserModel extends BaseModel {
         }
     
         public function create() {
-            $sql = "INSERT INTO User(email, password, role)
-                    VALUES (:email, :password, :role)";
+            $sql = "INSERT INTO User(email, password, role, employee_id)
+                    VALUES (:email, :password, :role, :employee_id)";
     
             $new_user = [
                 "email" => $this->email,
                 "password" => $this->password,
                 "role" => $this->role,
+                "employee_id" => $this->employee_id,
             ];
     
             $statement = $this->connection->prepare($sql);

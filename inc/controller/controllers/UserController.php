@@ -37,13 +37,26 @@ class UserController extends BaseController {
         $isValidUser = $this->manager->validateUser($email, $password);
   
         if ($isValidUser) {
-            $_SESSION['user_id'] = $isValidUser['id'];
+            // Fetch employee_id based on the user ID
+            $employeeId = $this->manager->getEmployeeIdByUserId($isValidUser['id']);
+
+            // Fetch the first and last name of the employee
+            $employeeName = $this->manager->getEmployeeNameById($employeeId);
+
+            // Fetch the image URL of the employee
+            $employeeImageUrl = $this->manager->getEmployeeImageUrlById($employeeId);
+
+            // Update the session variables
+            $_SESSION['user_id'] = $employeeId;
             $_SESSION['user_role'] = $isValidUser['role'];
+            $_SESSION['employee_name'] = $employeeName;
+            $_SESSION['employee_image_url'] = $employeeImageUrl;
+
             $this->anchor("register");
         } else {
             $this->error("Password for user with email $email is incorrect. Please try again!");
             $this->view("user/Login");
-        }  
+        }
     }
 
     public function logout() {

@@ -159,6 +159,10 @@ class EmployeeModel extends BaseModel {
         return $this->contact_number;
     }
 
+    public function getImageUrl() {
+        return $this->image_url;
+    }
+
     public function get_status() {
         return $this->status;
     }

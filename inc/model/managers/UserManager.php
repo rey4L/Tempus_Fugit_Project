@@ -56,4 +56,39 @@ class UserManager {
         $this->employeeModel->set_id($id);
         return $this->employeeModel->findById();
     }
+
+    public function getEmployeeIdByUserId($userId) {
+        $this->userModel->set_id($userId);
+        $user = $this->userModel->findById();
+
+        if ($user) {
+            return $user['employee_id'];
+        }
+
+        return null;
+    }
+
+    public function getEmployeeNameById($employeeId) {
+        $this->employeeModel->set_id($employeeId);
+        $employee = $this->employeeModel->findById();
+
+        if ($employee) {
+            $firstName = $employee['first_name'];
+            $lastName = $employee['last_name'];
+            return "$firstName $lastName";
+        }
+
+        return null;
+    }
+
+    public function getEmployeeImageUrlById($employeeId) {
+        $this->employeeModel->set_id($employeeId);
+        $employee = $this->employeeModel->findById();
+
+        if ($employee) {
+            return $employee['image_url'];
+        }
+
+        return null;
+    }
 }

@@ -1,5 +1,6 @@
 <?php
     include __DIR__."/../NavbarView.php";
+    $currentPage = "Employee";
 ?>
 
 <!DOCTYPE html>
