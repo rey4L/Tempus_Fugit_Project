@@ -1,11 +1,5 @@
 <?php
 
-
-// Start the session if it hasn't been started yet.
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
 // Handles database connection, table creation, and initialization.
 class Database {
     protected $connection;
@@ -76,12 +70,12 @@ class Database {
     
 
     private $initMenuItemSQL =
-     "INSERT INTO MenuItem(name, price, cost_to_produce, description, image, discount, tags, ingredients, stock_count, items_sold, profit_generated)
-    VALUES (:name, :price, :cost_to_produce, :description, :image, :discount, :tags, :ingredients, :stock_count, :items_sold, :profit_generated)";
+     "INSERT IGNORE INTO MenuItem(id, name, price, cost_to_produce, description, image, discount, tags, ingredients, stock_count, items_sold, profit_generated)
+    VALUES (:id, :name, :price, :cost_to_produce, :description, :image, :discount, :tags, :ingredients, :stock_count, :items_sold, :profit_generated)";
 
     private $initEmployeeDataSQL =
-        "INSERT INTO Employee(first_name, last_name, other_names, gender, age, dob, job_role, email, contact_number, image_url, status)
-         VALUES (:first_name, :last_name, :other_names, :gender, :age, :dob, :job_role, :email, :contact_number, :image_url, :status)
+        "INSERT IGNORE INTO Employee(id, first_name, last_name, other_names, gender, age, dob, job_role, email, contact_number, image_url, status)
+         VALUES (:id, :first_name, :last_name, :other_names, :gender, :age, :dob, :job_role, :email, :contact_number, :image_url, :status)
         "; 
 
     public function connect() {
@@ -114,12 +108,10 @@ class Database {
     }
 
     private function menuItemInit() {
-        if (isset($_SESSION['menu_initialized'])) {
-            return;
-        }
 
         $menu_data = [
             [
+                'id' => 1,
                 'name' => 'Chocolate Chip Ice Cream',
                 'price' => 1000,
                 'cost_to_produce' => 500,
@@ -133,6 +125,7 @@ class Database {
                 'profit_generated' => 0
             ],
             [
+                'id '=> 2,
                 'name' => 'Strawberry Swirl Sundae',
                 'price' => 1500,
                 'cost_to_produce' => 1000,
@@ -152,19 +145,14 @@ class Database {
             $statement->execute($data);
         }
 
-        // Mark the initialization as done
-        $_SESSION['menu_initialized'] = true;
     }
 
 
     private function employeeDataInit() {
 
-        if (isset($_SESSION['employee_initialized'])) {
-            return;
-        }
-
         $employee_data = [
             [
+                'id' => 1,
                 'first_name' => "Ricardo",
                 'last_name' => "Narine",
                 'other_names' => "Joshua",
@@ -178,6 +166,7 @@ class Database {
                 'status' => 'active'
             ],
             [
+                'id' => 2,
                 'first_name' => "Monica",
                 'last_name' => "Lee",
                 'other_names' => "Amy",
@@ -197,8 +186,6 @@ class Database {
             $statement->execute($data);
         }
 
-        // Mark the initialization as done
-        $_SESSION['employee_initialized'] = true;
     }
 
     public function getConnection() {
@@ -206,4 +193,3 @@ class Database {
     }
 }
 
-?>
