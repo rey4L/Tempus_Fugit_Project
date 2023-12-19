@@ -125,7 +125,7 @@ class Database {
                 'profit_generated' => 0
             ],
             [
-                'id '=> 2,
+                'id' => 2,
                 'name' => 'Strawberry Swirl Sundae',
                 'price' => 1500,
                 'cost_to_produce' => 1000,
