@@ -71,7 +71,7 @@ class RegisterManager {
 
     public function retrieveLastBillId() {
         $this->billModel->set_status("empty");
-        return $this->billModel->findByStatus()['id'];
+        return $this->billModel->findByStatus()['id'] ?? false;
     }
 
     public function submitBill($bill) {

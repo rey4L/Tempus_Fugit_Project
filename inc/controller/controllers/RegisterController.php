@@ -17,9 +17,8 @@ class RegisterController extends BaseController {
     }
 
     public function index() {
-        if (!isset($_SESSION['empty_bill_created'])) {
+        if (!$this->manager->retrieveLastBillId()) {
             $this->manager->createEmptyBill();
-            $_SESSION['empty_bill_created'] = true;
         }
         $this->findAll();
     }
@@ -95,7 +94,6 @@ class RegisterController extends BaseController {
         ];
 
         $this->manager->submitBill($bill);
-        unset($_SESSION['empty_bill_created']);
         $this->anchor("register");
     }
 }
