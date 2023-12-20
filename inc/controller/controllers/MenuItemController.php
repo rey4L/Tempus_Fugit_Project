@@ -54,7 +54,6 @@ class MenuItemController extends BaseController {
             $ingredients,
             $stock_count,
         )) {
-            print_r($_POST);
             $this->view("menu/MenuItemAdd");
             return;
         }

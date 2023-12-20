@@ -1,5 +1,6 @@
 <?php
 
+
 // Handles database connection, table creation, and initialization.
 class Database {
     protected $connection;
@@ -98,9 +99,12 @@ class Database {
                 foreach ($this->create_statements as $statement) {
                     $this->connection->exec($statement);
                 }
-      
-                $this->menuItemInit();
-                $this->employeeDataInit();
+                
+                if(!isset($_COOKIE['init'])) {
+                    setcookie("init", true, time() + (86400 * 30), "/");
+                    $this->menuItemInit();
+                    $this->employeeDataInit();
+                }
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
