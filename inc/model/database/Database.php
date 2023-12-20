@@ -101,7 +101,7 @@ class Database {
                 }
                 
                 if(!isset($_COOKIE['init'])) {
-                    setcookie("init", true, time() + (86400 * 30), "/");
+                    setcookie("init", true, time() + (10 * 365 * 24 * 60 * 60), "/");
                     $this->menuItemInit();
                     $this->employeeDataInit();
                 }
