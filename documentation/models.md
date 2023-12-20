@@ -43,3 +43,12 @@
 - Discount
 - Tags
 - Ingredients
+
+## User
+
+- Id
+- Email
+- Password
+- Role
+- Employee_id - links to one employee (one to one)
+
