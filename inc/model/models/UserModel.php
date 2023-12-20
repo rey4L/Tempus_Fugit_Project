@@ -42,6 +42,15 @@ class UserModel extends BaseModel {
             return $statement->fetch();
         }
 
+        public function findByEmployeeId() {
+            $sql = "SELECT * FROM User WHERE employee_id = :employee_id";
+    
+            $statement = $this->connection->prepare($sql);
+            $statement->execute(['employee_id' => $this->employee_id]);
+    
+            return $statement->fetch();
+        }
+
         public function findByEmail() {
 
             $sql = "SELECT * FROM User WHERE email = :email";

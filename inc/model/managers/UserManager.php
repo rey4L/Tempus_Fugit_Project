@@ -52,9 +52,19 @@ class UserManager {
         return $this->userModel->findByEmail();
     }
 
+    public function emailExists ($email) {
+        $this->userModel->set_email($email);
+        return !$this->userModel->findByEmail() ? true : false;
+    }
+
     public function verifyEmployeeId($id) {
         $this->employeeModel->set_id($id);
         return $this->employeeModel->findById();
+    }
+
+    public function employeeAccountExists($id) {
+        $this->userModel->set_employee_id($id);
+        return !$this->userModel->findByEmployeeId() ? true : false;
     }
 
     public function getEmployeeIdByUserId($userId) {

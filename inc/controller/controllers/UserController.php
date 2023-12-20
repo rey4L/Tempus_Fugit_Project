@@ -147,6 +147,11 @@ class UserController extends BaseController {
                 $this->view("user/Register");
                 return false;
                 break;
+            case $this->manager->emailExists($email):
+                $this->error("User with email $email already exists!");
+                $this->view("user/Register");
+                return false;
+                break;
             case $this->validator->validatePassword($password):
                 $this->error("Password must be of mininum 8 characters. Contain atleat 1 uppercase, 1 lowercase, 1 special character and 1 number!");
                 $this->view("user/Register");
@@ -164,6 +169,11 @@ class UserController extends BaseController {
                 break;
             case $this->manager->verifyEmployeeId($employee_id):
                 $this->error("Employee with id $employee_id does not exist! Please ensure your employee id is valid!");
+                $this->view("user/Register");
+                return false;
+                break;
+            case $this->manager->employeeAccountExists($employee_id):
+                $this->error("Employee with id $employee_id already has an account!");
                 $this->view("user/Register");
                 return false;
                 break;
