@@ -377,7 +377,7 @@ class MenuItemController extends BaseController {
                 return true;
                 break;
         }
-        return TRUE;
+        return true;
     }
 
 
