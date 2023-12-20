@@ -165,7 +165,7 @@ class Database {
                 'dob' => '1986-05-23',
                 'job_role' => 'owner',
                 'email' => 'davejohn@gmail.com',
-                'contact_number' => '666-1234',
+                'contact_number' => '656-5334',
                 'image_url' => 'owner.jpg',
                 'status' => 'active'
             ],
