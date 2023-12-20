@@ -32,7 +32,7 @@ class RegisterManager {
         return $menuItem;
     }
 
-    public function updateMenuItem($id, $amount) {
+    public function updateMenuItem($id, $amount, $reset = false) {
         $this->menuItemModel->set_id($id);
 
         $menuItem = $this->menuItemModel->findById();
@@ -47,15 +47,27 @@ class RegisterManager {
         $this->menuItemModel->set_tags($menuItem['tags']);
         $this->menuItemModel->set_ingredients($menuItem['ingredients']);
 
-        $this->menuItemModel->set_stock_count(
-            $menuItem['stock_count'] - $amount
-        );
-        $this->menuItemModel->set_items_sold(
-            $menuItem['items_sold'] + $amount
-        );
-        $this->menuItemModel->set_profit_generated(
-            $menuItem['profit_generated'] + $profitGenerated
-        );
+        if (!$reset) {
+            $this->menuItemModel->set_stock_count(
+                $menuItem['stock_count'] - $amount
+            );
+            $this->menuItemModel->set_items_sold(
+                $menuItem['items_sold'] + $amount
+            );
+            $this->menuItemModel->set_profit_generated(
+                $menuItem['profit_generated'] + $profitGenerated
+            );
+        } else {
+            $this->menuItemModel->set_stock_count(
+                $menuItem['stock_count'] + $amount
+            );
+            $this->menuItemModel->set_items_sold(
+                $menuItem['items_sold'] - $amount
+            );
+            $this->menuItemModel->set_profit_generated(
+                $menuItem['profit_generated'] - $profitGenerated
+            );
+        }
 
         $this->menuItemModel->update();
     }

@@ -80,7 +80,16 @@ class RegisterController extends BaseController {
 
     public function delete($id) {
         $this->model->set_id($id);
+        $billId = $this->model->findById();
+
+        $this->manager->updateMenuItem(
+            $billId['menu_item_id'], 
+            $billId['amount'], 
+            true
+        );
+
         $this->model->delete();
+
         $this->anchor("register");
     }
 
