@@ -26,7 +26,7 @@ Note: For the graph labeled `Items Sold`, it is recommended not to select the sa
 - The image URL field for adding new menu items is now functional.
 - Data stored in the register, prior to confirming, is now preserved even if the browser is closed or the session is deleted, preventing the creation of unused empty bills.
 - Unnecessary number values such as `INT(20)` in the database have been removed.
-- Database initialization in `Database.php` no longer relies on a session to prevent duplicate inputs. Instead, an `IGNORE` SQL statement and a cookie are used. See [[README ##Database Initialization]].
+- Database initialization in `Database.php` no longer relies on a session to prevent duplicate inputs. Instead, an `IGNORE` SQL statement and a cookie are used. See [Database Initialization](#database-initialization).
 - `config.json` has been created to manage `GET` and `POST` permissions and user role privileges.
 - All additional requirements have been satisfied.
 
