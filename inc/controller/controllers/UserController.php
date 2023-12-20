@@ -1,15 +1,13 @@
 <?php
 
 class UserController extends BaseController {
-    private $model;
+
     private $manager;
     private $validator;
 
     public function __construct() {
-       $this->model = new UserModel();
        $this->manager = new UserManager();
        $this->validator = new UserValidator();
-
     }
 
     public function index() {
