@@ -1,6 +1,6 @@
 .graph-div {
-    width: 70%;
-    margin: 4vh auto;
+    width: 63%;
+    margin: 5.5vh auto;
     box-sizing: border-box;
 }
 
@@ -9,11 +9,11 @@
     text-align: center;
     border: 2px solid #95C5FF;
     border-radius: 20px; 
-    padding: 8px 10px;
+    padding: 8px 8px;
     background-color: #95C5FF;
     color: white;
     cursor: pointer;
-    margin: 3vh 0 0 0;
+    margin: 2vh 0 0 0;
 }
 
 .switch-graph-button,

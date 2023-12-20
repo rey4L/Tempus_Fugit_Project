@@ -35,7 +35,7 @@
         <label for="image">Image Url</label>
         <input type="text" name="image" required>
 
-        <label for="discount">Discount</label>
+        <label for="discount">Discount <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="Enter the discount percentage in decimal form (e.g. 0.5 for 50% off)"></label>
         <input type="text" name="discount" required>
 
         <label for="ingredients">Ingredients <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="No spaces, separated by commas(,)"></label>
