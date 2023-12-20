@@ -47,6 +47,18 @@ class UserManager {
         return false;
     }
 
+    public function verifyUserPrivileges($id, $role) {
+        $this->employeeModel->set_id($id);
+        $this->employeeModel->findById();
+
+        $valid_manager_jobs = ['owner',  'manager'];
+
+        if (!in_array($this->employeeModel->get_job_role(), $valid_manager_jobs) && $role === 'manager') 
+            return false;
+
+        return true;
+    }
+
     public function verifyUserEmail($email) {
         $this->userModel->set_email($email);
         return $this->userModel->findByEmail();

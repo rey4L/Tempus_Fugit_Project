@@ -177,6 +177,11 @@ class UserController extends BaseController {
                 $this->view("user/Register");
                 return false;
                 break;
+            case $this->manager->verifyUserPrivileges($employee_id, $role):
+                $this->error("Employee with Id : $employee_id cannot be a manager!");
+                $this->view("user/Register");
+                return false;
+                break;
             default:
                 return true;
                 break;
