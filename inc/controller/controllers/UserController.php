@@ -192,17 +192,17 @@ class UserController extends BaseController {
         switch (false) {
             case $this->validator->isEmail($email):
                 $this->error("Email should not be empty and of format like youremail@gmail.com!");
-                $this->view("user");
+                $this->index();
                 return false;
                 break;
             case $this->validator->isString($password):
                 $this->error("Password should not be empty!");
-                $this->view("user");
+                $this->index();
                 return false;
                 break;
             case $this->manager->verifyUserEmail($email):
-                $this->error("Unknown user with email $email");
-                $this->view("user/Register");
+                $this->error("Unknown user with email $email. Please see register");
+                $this->index();
                 return false;
                 break;
             default:

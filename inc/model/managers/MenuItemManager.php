@@ -13,13 +13,14 @@ class MenuItemManager {
 
     public function getMostSoldItems() {
         $items =  $this->menuItemModel->findAllByItemsSold();
+
         $mostSoldItems = array_slice(
            $items,
             0,
             count($items) < 10 ? count($items): 10
         );
 
-        if (count($items) <= 3) return $mostSoldItems;
+        if (count($items) <= 10) return $mostSoldItems;
 
         $lastItemIndex = count($items) < 10 ? count($items) - 1 : 9;
         $lastItemItemsSold = $mostSoldItems[$lastItemIndex]['items_sold'];
@@ -46,7 +47,7 @@ class MenuItemManager {
             count($items) < 10 ? count($items) : 10
         );
 
-        if (count($items) <= 3) return $mostProfitableItems;
+        if (count($items) <= 10) return $mostProfitableItems;
 
         $lastItemIndex = count($items) < 10 ? count($items) - 1 : 9;
         $lastItemProfitGenerated = $mostProfitableItems[$lastItemIndex]['profit_generated'];

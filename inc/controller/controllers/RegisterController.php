@@ -7,12 +7,12 @@ if (session_status() == PHP_SESSION_NONE) {
 class RegisterController extends BaseController {
 
     private $manager;
-    private $billItemModel;
+    private $model;
     private $validator;
 
     public function __construct() {
         $this->manager = new RegisterManager();
-        $this->billItemModel = new BillItemModel();
+        $this->model = new BillItemModel();
         $this->validator = new RegisterValidator();
     }
 
@@ -24,12 +24,12 @@ class RegisterController extends BaseController {
     }
 
     public function findAll() {
-        $this->billItemModel->set_bill_id(
+        $this->model->set_bill_id(
             $this->manager->retrieveLastBillId()
         );
 
         $data = [
-            "billItems" => $this->billItemModel->findAllForBill(),
+            "billItems" => $this->model->findAllForBill(),
             "menuList" => $this->manager->getMenuItemsList()
         ];
 
@@ -66,21 +66,21 @@ class RegisterController extends BaseController {
 
         $this->manager->updateMenuItem($menuId, $amount);
 
-        $this->billItemModel->set_name($name);
-        $this->billItemModel->set_price($price);
-        $this->billItemModel->set_total($total);
-        $this->billItemModel->set_amount($amount);
-        $this->billItemModel->set_bill_id($billId);
-        $this->billItemModel->set_discount($discount);
-        $this->billItemModel->set_menu_item_id($menuId);
+        $this->model->set_name($name);
+        $this->model->set_price($price);
+        $this->model->set_total($total);
+        $this->model->set_amount($amount);
+        $this->model->set_bill_id($billId);
+        $this->model->set_discount($discount);
+        $this->model->set_menu_item_id($menuId);
         
-        $this->billItemModel->create();
+        $this->model->create();
         $this->anchor("register");
     }
 
     public function delete($id) {
-        $this->billItemModel->set_id($id);
-        $this->billItemModel->delete();
+        $this->model->set_id($id);
+        $this->model->delete();
         $this->anchor("register");
     }
 
