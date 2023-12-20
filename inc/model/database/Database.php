@@ -153,6 +153,20 @@ class Database {
         $employee_data = [
             [
                 'id' => 1,
+                'first_name' => "Dave",
+                'last_name' => "Dunder",
+                'other_names' => "John",
+                'gender' => 1,
+                'age' => 37,
+                'dob' => '1986-05-23',
+                'job_role' => 'owner',
+                'email' => 'davejohn@gmail.com',
+                'contact_number' => '666-1234',
+                'image_url' => 'owner.jpg',
+                'status' => 'active'
+            ],
+            [
+                'id' => 2,
                 'first_name' => "Ricardo",
                 'last_name' => "Narine",
                 'other_names' => "Joshua",
@@ -166,7 +180,7 @@ class Database {
                 'status' => 'active'
             ],
             [
-                'id' => 2,
+                'id' => 3,
                 'first_name' => "Monica",
                 'last_name' => "Lee",
                 'other_names' => "Amy",

@@ -147,3 +147,8 @@
     width: calc(50% - 10px);
     margin-left: 10px;
 }
+
+.employee-view-picture {
+    width: 500px;
+    height: auto;
+}
