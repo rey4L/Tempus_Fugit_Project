@@ -33,6 +33,10 @@ class Validator {
         return filter_var($input, FILTER_VALIDATE_FLOAT) !== false;
     }
 
+    public function isNumber($input){
+        return $this->isInt($input) || $this->isFloat($input);
+    }
+
     public function isEmail($input){
         return filter_var($input, FILTER_VALIDATE_EMAIL) !== false;
     }
