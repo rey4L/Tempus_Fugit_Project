@@ -29,22 +29,18 @@ class MenuItemController extends BaseController {
             $discount, 
             $tags, 
             $ingredients,
-            $stock_count,
-            $items_sold,
-            $profit_generated
+            $stock_count
 
         ) = $this->validator->sanitize(
             $_POST['name'],
             $_POST['price'],
-            $_POST['cost_to_produce'],
+            $_POST['cost-to-produce'],
             $_POST['description'],
             $_POST['image'],
             $_POST['discount'],
             $_POST['tags'],
             $_POST['ingredients'],
-            $_POST['stock_count'],
-            $_POST['items_sold'],
-            $_POST['profit_generated']
+            $_POST['stock']
         );
 
         if (!$this->validateInputs(
@@ -57,10 +53,9 @@ class MenuItemController extends BaseController {
             $tags, 
             $ingredients,
             $stock_count,
-            $items_sold,
-            $profit_generated
         )) {
-            $this->view("MenuAdd");
+            print_r($_POST);
+            $this->view("menu/MenuItemAdd");
             return;
         }
 
@@ -99,22 +94,18 @@ class MenuItemController extends BaseController {
             $discount,
             $tags,
             $ingredients,
-            $stock_count,
-            $items_sold,
-            $profit_generated
+            $stock_count
 
         ) = $this->validator->sanitize(
             $_POST['name'],
             $_POST['price'],
-            $_POST['cost_to_produce'],
+            $_POST['cost-to-produce'],
             $_POST['description'],
             $_POST['image'],
             $_POST['discount'],
             $_POST['tags'],
             $_POST['ingredients'],
-            $_POST['stock_count'],
-            $_POST['items_sold'],
-            $_POST['profit_generated']
+            $_POST['stock']
         );
 
         if (!$this->validateInputs(
@@ -126,11 +117,9 @@ class MenuItemController extends BaseController {
             $discount,
             $tags,
             $ingredients,
-            $stock_count,
-            $items_sold,
-            $profit_generated
+            $stock_count
         )) {
-            $this->view("MenuTab");
+            $this->index();
             return;
         }
         $this->model->set_id($id);
@@ -313,7 +302,7 @@ class MenuItemController extends BaseController {
         }
     }
 
-    private function validateInputs($name, $price, $cost_to_produce, $description, $image, $discount, $tags, $ingredients, $stock_count, $items_sold, $profit_generated) {
+    private function validateInputs($name, $price, $cost_to_produce, $description, $image, $discount, $tags, $ingredients, $stock_count) {
         switch (false) {
             case $this->validator->isString($name):
                 $this->error("Name should not be empty!");
@@ -353,14 +342,6 @@ class MenuItemController extends BaseController {
                 break;
             case $this->validator->isInt($stock_count):
                 $this->error("Stock count should be a number!");
-                return false;
-                break;
-            case $this->validator->isInt($items_sold):
-                $this->error("Items sold should be a number!");
-                return false;
-                break;
-            case $this->validator->isFloat($profit_generated):
-                $this->error("Profit generated should be a valid floating number! Example 0.1, 4");
                 return false;
                 break;
             default:
