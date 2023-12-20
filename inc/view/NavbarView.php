@@ -36,7 +36,7 @@ $currentPage = implode('/', array_slice($segments, 2));
                     <p class="profile-username">USERNAME HERE</p>
                 <?php endif; ?>
 
-                <form action="<?=BASE_URL?>">
+                <form action="<?=BASE_URL."/user/logout"?>">
                     <button type="submit">Log Out</button>
                 </form>
             </div>

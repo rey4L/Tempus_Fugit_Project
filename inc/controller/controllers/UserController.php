@@ -66,6 +66,7 @@ class UserController extends BaseController {
         // Unset all of the session variables.
         $_SESSION = array();
 
+
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
 
@@ -77,6 +78,8 @@ class UserController extends BaseController {
 
         // Finally, destroy the session.
         session_destroy();
+
+        $this->anchor('user');
     }
 
     public function registerPage() {

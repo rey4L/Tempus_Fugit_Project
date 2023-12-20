@@ -1,10 +1,7 @@
 {
     "GET" : [
         "index",
-        "logout",
-        "login",
-        "register",
-        "registerPage"
+        "logout"
     ],
     "POST" : [
         "findAll",
