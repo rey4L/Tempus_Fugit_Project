@@ -24,8 +24,11 @@ trait SearchAndFilter {
             $this->index();
             return;
         }
-            
+
+        //Use of wildcards for partial matching
+        $searchQuery = '%' . $searchQuery . '%';
         $this->model->set_name($searchQuery);
+        
         $data = $this->model->findAllByName();
         $this->view($viewPath, $data = $data);
     }

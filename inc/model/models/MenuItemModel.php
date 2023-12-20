@@ -48,7 +48,7 @@ class MenuItemModel extends BaseModel {
     }
 
     public function findAllByName() {
-        $sql = "SELECT * FROM MenuItem WHERE name = :name";
+        $sql = "SELECT * FROM MenuItem WHERE name LIKE :name";
 
         $statement = $this->connection->prepare($sql);
         $statement->execute(['name' => $this->name]);
