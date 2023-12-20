@@ -51,7 +51,7 @@ class UserManager {
         $this->employeeModel->set_id($id);
         $employee = $this->employeeModel->findById();
 
-        $valid_manager_jobs = ['owner',  'manager'];
+        $valid_manager_jobs = ['owner', 'manager', 'cook'];
 
         if (!in_array($employee['job_role'], $valid_manager_jobs) && $role === 'manager') 
             return false;
