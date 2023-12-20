@@ -49,11 +49,11 @@ class UserManager {
 
     public function verifyUserPrivileges($id, $role) {
         $this->employeeModel->set_id($id);
-        $this->employeeModel->findById();
+        $employee = $this->employeeModel->findById();
 
         $valid_manager_jobs = ['owner',  'manager'];
 
-        if (!in_array($this->employeeModel->get_job_role(), $valid_manager_jobs) && $role === 'manager') 
+        if (!in_array($employee['job_role'], $valid_manager_jobs) && $role === 'manager') 
             return false;
 
         return true;

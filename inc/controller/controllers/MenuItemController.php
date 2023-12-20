@@ -60,6 +60,7 @@ class MenuItemController extends BaseController {
             $items_sold,
             $profit_generated
         )) {
+            $this->view("MenuAdd");
             return;
         }
 
@@ -129,6 +130,7 @@ class MenuItemController extends BaseController {
             $items_sold,
             $profit_generated
         )) {
+            $this->view("MenuTab");
             return;
         }
         $this->model->set_id($id);
@@ -315,62 +317,50 @@ class MenuItemController extends BaseController {
         switch (false) {
             case $this->validator->isString($name):
                 $this->error("Name should not be empty!");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isInt($price):
                 $this->error("Price should be a number!. Example: 1, 24.5");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isFloat($cost_to_produce):
                 $this->error("Cost to produce should be a valid floating number! Example 0.1, 4");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isString($description):
                 $this->error("Description should not be empty!");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isString($image):
                 $this->error("Image should not be empty!");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isFloat($discount):
                 $this->error("Discount should be a valid floating number! Example 0.1, 4");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->validateDiscount($discount):
                 $this->error("Discount should be between 1 and 0! Example 0.1");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->validateTags($tags):
                 $this->error("Tags should be in valid format and should not be empty! Example tag1,tag2");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->validateTags($ingredients):
                 $this->error("Ingredients should be in valid format and should not be empty! Example ingredient1,ingredient2");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isInt($stock_count):
                 $this->error("Stock count should be a number!");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isInt($items_sold):
                 $this->error("Items sold should be a number!");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             case $this->validator->isFloat($profit_generated):
                 $this->error("Profit generated should be a valid floating number! Example 0.1, 4");
-                $this->view("menu/MenuItemAdd");
                 return false;
                 break;
             default:
