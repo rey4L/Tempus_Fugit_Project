@@ -1,93 +1,88 @@
-
 # Quick Setup Guide
 
-1. **Extract** the `Tempus_Fugit_Project` folder into the `htdocs` directory or use `git clone` to clone the repository from <https://github.com/rey4L/Tempus_Fugit_Project.git> into `htdocs`.
-2. **Start** php and MySQL in XAMMP.
-3. **Create** a database named `karens_kitchen` in PhpMyAdmin. _If database `karens_kitchen` already exists, please drop all tables to facilitate the database initialization._
+1. **Extract** the `Tempus_Fugit_Project` folder into the `htdocs` directory, or use `git clone` to clone the repository from [github.com/rey4L/Tempus_Fugit_Project](https://github.com/rey4L/Tempus_Fugit_Project.git) into `htdocs`.
+2. **Start** PHP and MySQL in XAMPP.
+3. **Create** a database named `karens_kitchen` in PhpMyAdmin. _If the `karens_kitchen` database already exists, please drop all tables to facilitate database initialization._
 4. **Navigate** to the `/Tempus_Fugit_Project` directory.
 
 ## User Accounts
 
-To access the system, you must first register for a user account. There are serveral rules that should be aware of:
+To access the system, you must first register for a user account. Please be aware of several rules:
 
-1. To register, you must be in possession of a valid employee id. For simplicity, these initialized employees possess ids 1, 2, and 3.
-2. There exist a one to one relation between an employee and a user account. Therefore, only one account can be created for an employee.
-3. The given job roles for an employee will dictate whether or not they qualify for a job role, that is either a manager or cashier. Employees with id of 1 and 2 qualify for a manager/cashier role and employee 3 qualifies only for a cashier role.
-4. The same email cannot be used for multiple accounts
-5. Passwords must be strong
+1. Registration requires a valid employee ID. Initially, employees with IDs 1, 2, and 3 are set up.
+2. There is a one-to-one relationship between an employee and a user account, meaning only one account can be created per employee.
+3. An employee's job role determines their eligibility for a manager or cashier role. Employees with IDs 1 and 2 are eligible for both roles, while employee 3 is only eligible for the cashier role.
+4. The same email cannot be used for multiple accounts.
+5. Passwords must be strong (*i.e., it must have a minimum length of 8 characters, contain at least 1 uppercase, 1 lowercase, 1 special character and 1 number*).
 
 ## Graphs
 
-All graphs are located on the menu tab. These graphs will only show data until items have been sold. Therefore, inorder to see the graphs, first use the register to create bills.
+Graphs are accessible via the menu tab. They will display data only after items have been sold. To view the graphs, first use the register to create bills.
 
-In particular note to the graph whose identifier button is `Items sold`, while it is not a rule, do select the same start and end date. The graph will render but since it is only one data point, only a single point will be plotted. This is representative of what the graph is, that is a line graph. 
+Note: For the graph labeled `Items Sold`, it is recommended not to select the same start and end date. This will render a line graph with a single data point.
 
-## Known / Notable Bug Fixes Or Improvements
+## Known / Notable Bug Fixes and Improvements
 
-- Menu item's image url field when adding a new menu item is now functional.
-- Data stored on register, prior to hitting the confirm button, is now non-volatile, such that closing the browser or deleting the session will not clear the values and result in a additional empty bill created that will never be used.
-- Unecessary number values such as `INT(20)` on database have been removed
-- Database.php init no longer depends on a session for preventing duplicate inputs. `IGNORE` sql statement is used instead. However a cookie is now utilized. See [[README#Database Initialization]].
-- config.json has been created to easily manage `GET` and `POST` permissions as well as user role privilages.
-- All additional given requirements have been satisified.
+- The image URL field for adding new menu items is now functional.
+- Data stored in the register, prior to confirming, is now preserved even if the browser is closed or the session is deleted, preventing the creation of unused empty bills.
+- Unnecessary number values such as `INT(20)` in the database have been removed.
+- Database initialization in `Database.php` no longer relies on a session to prevent duplicate inputs. Instead, an `IGNORE` SQL statement and a cookie are used. See [[README#Database Initialization]].
+- `config.json` has been created to manage `GET` and `POST` permissions and user role privileges.
+- All additional requirements have been satisfied.
 
 ## Database Initialization
 
-The project automatically initializes the database with data on the first run. To reinitialize the database, if needed, follow these steps:
+The project automatically initializes the database with data on the first run. To reinitialize the database, if necessary, follow these steps:
 
 1. **Drop** existing tables in the `karens_kitchen` database.
-2. **Delete** the existing cookie `init`:
-   - Open browser's inspect tool.
-   - Navigate to the Application Tab.
-   - Locate and delete the session cookie under `init`
+2. **Delete** the `init` cookie:
+    - Open the browser's inspect tool.
+    - Navigate to the Application Tab.
+    - Locate and delete the `init` session cookie.
 
-Note that the application only initializes menuitems and employees. To see bill on bill tab, please create one or more using the cash register interface.
+Note: The application initializes only menu items and employees. To view bills in the bill tab, create them using the cash register interface.
 
-Also to note, with the set database values for menuitem, bill item and bill, the max price and total is 999999999999999999999999.99999. Therefore, in the unlikely event a number higher than this is calculated or added as the price for an item, it will appear as a math error in calculation. However, it is not so. The values in the database are simply limited to their given size.
-
-
+Also, note that with the set database values, the maximum price and total is 999999999999999999999999.99999. Therefore, if a number higher than this is entered as the price for an item, it will result in a calculation error. This is due to database value limitations, not a mathematical error.
 
 ## Configuration Settings
 
 To run the project in a subdirectory within `htdocs`, adjust the global variables `BASE_URL`, `RESOURCE_PATH`, and `CSS_PATH` in `inc/core/config.php`.
 
-For instance, to run the application from a subfolder named `personal` (located within `htdocs` and containing the `Tempus_Fugit_Project` project folder), modify the global variables as follows:
+For example, to run the application from a subfolder named `personal` (located within `htdocs` and containing the `Tempus_Fugit_Project` folder), modify the global variables as follows:
 
 #### Example Folder Structure:
 
-    htdocs
-    ├── personal
-        └── Tempus_Fugit_Project
+```
+htdocs
+├── personal
+    └── Tempus_Fugit_Project
+```
 
 1. `BASE_URL = "/personal/Tempus_Fugit_Project";`
-2. `CSS_PATH = "http://localhost/personal/Tempus_Fugit_Project/public/css/"`
-3. `RESOURCE_URL = "http://localhost/personal/Tempus_Fugit_Project/public/images/"`
+2. `CSS_PATH = "http://localhost/personal/Tempus_Fugit_Project/public/css/";`
+3. `RESOURCE_URL = "http://localhost/personal/Tempus_Fugit_Project/public/images/";`
 
-Note that `inc/core/config.php` is where the configurations for the database are set. If desirable, go here to change database settings.
-
-
+Note: `inc/core/config.php` is where database configurations are set. If desirable, go here to change database settings.
 
 ## CSS Loading Issues
 
-If the webpage styling isn't appearing, perform these steps:
+If webpage styling isn't appearing, follow these steps:
 
 1. Go to your browser's settings.
 2. Search for and select the option to clear browsing history.
-3. Specifically, choose to clear _Cache images and files_ (instructions based on Chrome Web Browser).
+3. Specifically, choose to clear _Cache images and files_ (instructions based on the Chrome Web Browser).
 4. Reload the webpage.
 
-_For a visual reference of the intended website design, please refer to the Figma file:_ <https://www.figma.com/file/CpIRBICRaH4dku8PVfwDsJ/CSE3101_Design_Assigment_2?type=design&node-id=0%3A1&mode=design&t=FQXvdimrpZpFMqSp-1>.
+_For a visual reference of the intended website design, please refer to the Figma file:_ [figma.com/file](https://www.figma.com/file/CpIRBICRaH4dku8PVfwDsJ/CSE3101_Design_Assigment_2?type=design&node-id=0%3A1&mode=design&t=FQXvdimrpZpFMqSp-1).
 
-_N.B_ The design is not accurate to the final outcome. It is similar enough to give an idea of what the website should look like.
+_N.B._ The design is not an exact match to the final outcome but is similar enough to give an idea of what the website should look like.
 
 ## Inserting Multiple Values
 
-When you need to insert multiple values into fields like _othernames_ for employees or _tags_ and _ingredients_ for menu items, enter the values separated by commas without spaces, like "tag1,tag2,tag3". Such fields are assisted by a info bubble icon such that when hovered over, will provide instructions.
+When inserting multiple values into fields like _othernames_ for employees or _tags_ and _ingredients_ for menu items, enter the values separated by commas without spaces, e.g., "tag1,tag2,tag3". Info bubble icons next to such fields provide instructions when hovered over.
 
-Info bubbles in general will provide instructions for the user.
+Info bubbles generally offer guidance for the user.
 
 ## Understanding Action Buttons
 
-For clarity on the function of each action button, simply hover your cursor over them. A brief description will appear, usually within half a second, to guide you on their specific purpose.
-
-
+For clarity on the function of each action button, hover your cursor over them. A brief description will appear, usually within half a second, to guide you on their specific purpose.
