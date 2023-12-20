@@ -1,10 +1,6 @@
 {
     "GET" : [
         "index",
-        "showMostProfitableItems",
-        "showMostSoldItems",
-        "showMostSoldWithinPeriod",
-        "showMostSoldWithinPeriodLine",
         "logout",
         "login",
         "register",
