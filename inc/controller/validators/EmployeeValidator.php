@@ -2,8 +2,6 @@
 
 class EmployeeValidator extends Validator {
 
- 
-  
     public function validateGender($gender) {
         $validGenders = [1, 0];
         return in_array($gender, $validGenders);
@@ -15,7 +13,6 @@ class EmployeeValidator extends Validator {
                 FILTER_VALIDATE_INT, 
                 ['options' => ['min_range' => 18, 'max_range' => 70]]);
     }
-
 
     public function validateDobAndAge($dob, $age) {
         return $this->calculateAge($dob) == $age;

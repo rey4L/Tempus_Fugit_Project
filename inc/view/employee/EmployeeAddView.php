@@ -29,7 +29,7 @@
             <option value="0">Female</option>
         </select>
 
-        <label for="age">Age</label>
+        <label for="age">Age <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="Must be 18+ and younger than 71"></label>
         <input type="number" name="age" min="18" max="70" required>
 
         <label for="dob">Date of Birth</label>
@@ -46,7 +46,7 @@
         <label for="email">Email</label>
         <input type="email" name="email" required>
 
-        <label for="contact-number">Contact Number</label>
+        <label for="contact-number">Contact Number <img class="info-icon" src="<?= RESOURCE_URL."info_icon.png"?>" alt="Info icon" title="Must be a seven digit number"></label>
         <input type="text" name="contact-number" required>
 
         <label for="image-url">Image URL</label>
