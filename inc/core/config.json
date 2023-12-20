@@ -43,8 +43,7 @@
         "EmployeeController",
         "MenuItemController",
         "RegisterController",
-        "ErrorController",
-        "TestController"
+        "ErrorController"
     ]
 
 }
