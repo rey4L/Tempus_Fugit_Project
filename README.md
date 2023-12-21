@@ -12,8 +12,9 @@ To access the system, you must first register for a user account. Please be awar
 1. Registration requires a valid employee ID. Initially, employees with IDs 1, 2, and 3 are set up.
 2. There is a one-to-one relationship between an employee and a user account, meaning only one account can be created per employee.
 3. An employee's job role determines their eligibility for a manager or cashier role. Employees with IDs 1 and 2 are eligible for both roles, while employee 3 is only eligible for the cashier role.
-4. The same email cannot be used for multiple accounts.
-5. Passwords must be strong (*i.e., it must have a minimum length of 8 characters, contain at least 1 uppercase, 1 lowercase, 1 special character and 1 number*).
+4. A cashier can only access the register and bill pages.
+5. The same email cannot be used for multiple accounts.
+6. Passwords must be strong (*i.e., it must have a minimum length of 8 characters, contain at least 1 uppercase, 1 lowercase, 1 special character and 1 number*).
 
 ## Graphs
 
