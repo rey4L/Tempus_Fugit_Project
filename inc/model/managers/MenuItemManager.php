@@ -93,8 +93,6 @@ class MenuItemManager {
 
     public function getItemsSoldWithinPeriodLine($startDate, $endDate) {
         $this->billModel->set_status("cancelled");
-        $bills = $this->billModel->findAllWithinPeriod($startDate, $endDate);
-
   
         $bills = $this->billModel->findAllWithinPeriod($startDate, $endDate); 
         $items = [
