@@ -90,6 +90,7 @@ class RegisterManager {
         $this->billModel->set_id($bill['id']);
         $this->billModel->set_number_of_items($bill['number_of_items']);
         $this->billModel->set_total_cost($bill['total_cost']);
+        date_default_timezone_set('America/Guyana');
         $this->billModel->set_order_date(date("Y/m/d"));
         $this->billModel->set_status("Pending");
         $this->billModel->update();

@@ -73,7 +73,10 @@ class MenuItemManager {
             "labels" => [],
             "data" => []
         ];
+
+
         foreach($bills as $bill) {
+            
             $this->billItemModel->set_bill_id($bill['id']);
             foreach($this->billItemModel->findAllForBill() as $billItem) {
                 if (!in_array($billItem['name'], $items['labels'])) {
@@ -99,6 +102,7 @@ class MenuItemManager {
             "title" => [],
             "data" => []
         ];
+
         foreach($bills as $bill) {
             $this->billItemModel->set_bill_id($bill['id']);
             foreach($this->billItemModel->findAllForBill() as $billItem) {
